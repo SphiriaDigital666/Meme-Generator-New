@@ -1,24 +1,5 @@
-import image8 from "../../assets/5.png"
-import image1 from "../../assets/image01.png"
-import image2 from "../../assets/image02.png"
-import image3 from "../../assets/image03.png"
-import image4 from "../../assets/image04.png"
-import image5 from "../../assets/image05.png"
-import image6 from "../../assets/image06.png"
-import image7 from "../../assets/image07.png"
-import element from "../../assets/sidebar/Apps.png"
-import sounds from "../../assets/sidebar/Audio.png"
-import crop from "../../assets/sidebar/Crop.png"
-import help from "../../assets/sidebar/Help.png"
-import image from "../../assets/sidebar/Image File.png"
-import media from "../../assets/sidebar/Import.png"
-import layers from "../../assets/sidebar/Layers.png"
-import text from "../../assets/sidebar/Lowercase (1).png"
-import more from "../../assets/sidebar/More.png"
-import template from "../../assets/sidebar/Prototype.png"
+
 import TextIcon from "../../assets/textEditor/Lowercase.png"
-//////////////////////////
-import logo123 from "../../assets/textEditor/collage-pic.png"
 import TemplateControl from "../MemeTemplates/TemplateControl"
 import RowCollage from "../collage/RowCollage"
 import Collage from "../collage/collage"
@@ -38,8 +19,6 @@ import Draggable from "react-draggable"
 import { MdArrowBackIos, MdDownloadForOffline, MdImage } from "react-icons/md"
 import { Provider } from "react-redux"
 import { Link } from "react-router-dom"
-
-const images = [image1, image2, image3, image4, image5, image6, image7, image8]
 
 const MemeEditor = () => {
   const [texts, setTexts] = useState([])
@@ -163,8 +142,15 @@ const MemeEditor = () => {
 
   const handleDeleteText = () => {
     if (selectedTextId !== null) {
-      setTexts(texts.filter((text) => text.id !== selectedTextId))
-      setSelectedTextId(null)
+      const newTexts = texts.filter((text) => text.id !== selectedTextId)
+      setTexts(newTexts)
+
+      // Select the previous or next text after deletion, or null if no text remains
+      if (newTexts.length > 0) {
+        setSelectedTextId(newTexts[0].id) // Select the first remaining text
+      } else {
+        setSelectedTextId(null) // No text left, set to null
+      }
     }
   }
 
@@ -174,32 +160,6 @@ const MemeEditor = () => {
 
   const handleBackgroundColorChange = (color) => {
     setBackgroundColor(color.hex)
-  }
-
-  // Handle sticker upload
-
-  const handleStickerUpload = (e) => {
-    const file = e.target.files[0]
-
-    if (file) {
-      const reader = new FileReader()
-
-      reader.onload = (event) => {
-        setStickers([
-          ...stickers,
-          {
-            id: Date.now(),
-            src: event.target.result,
-            x: 50,
-            y: 50,
-            width: 100, // Default width
-            height: 100, // Default height
-          },
-        ])
-      }
-
-      reader.readAsDataURL(file)
-    }
   }
 
   const handleStickerResize = (stickerId, newWidth, newHeight) => {
@@ -226,7 +186,7 @@ const MemeEditor = () => {
       ...stickers,
       {
         id: Date.now(),
-        src: image.src,
+        src: image,
         x: 50,
         y: 50,
         width: 100, // Default width
@@ -236,11 +196,19 @@ const MemeEditor = () => {
   }
 
   const handleDownloadMeme = () => {
-    // Hide all sticker close buttons
+    // Hide all sticker close buttons and remove dotted borders from selected text
     const closeButtons = document.querySelectorAll(".sticker-close-button")
     closeButtons.forEach((button) => {
       button.style.display = "none"
     })
+
+    // Remove the dotted border from the selected text
+    const selectedTextElement = document.getElementById(
+      `text-${selectedTextId}`,
+    )
+    if (selectedTextElement) {
+      selectedTextElement.style.border = "none"
+    }
 
     // Capture the meme
     html2canvas(memeRef.current).then((canvas) => {
@@ -248,6 +216,11 @@ const MemeEditor = () => {
       link.href = canvas.toDataURL("image/png")
       link.download = "meme.png"
       link.click()
+
+      // Restore the dotted border after download
+      if (selectedTextElement) {
+        selectedTextElement.style.border = "2px dotted #fff"
+      }
 
       // Restore the close buttons after download
       closeButtons.forEach((button) => {
@@ -363,37 +336,12 @@ const MemeEditor = () => {
                           Change Image
                         </button>
                       </div>
-
-                      <div style={{margin: "0",}}>
-                        {selectedImage && (
-                          <div className="mx-auto sm:mt-6">
-                            {/* Hidden file input */}
-                            <input
-                              id="fileInput"
-                              className="hidden" // or use 'sr-only' if using Tailwind CSS
-                              type="file"
-                              accept="image/*"
-                              onChange={handleStickerUpload}
-                            />
-
-                            {/* Custom button */}
-                            <label
-                              htmlFor="fileInput"
-                              className="inline-block w-[100px] cursor-pointer rounded-md bg-[#5f5f5f] py-2 text-center text-[12px] text-white transition-colors hover:bg-[#4e4e4e] md:w-[120px] lg:w-[130px] xl:w-[140px] 2xl:w-[160px]"
-                            >
-                              Upload Sticker
-                            </label>
-                          </div>
-                        )}
-                      </div>
-
                       <div>
                         <button
                           className="mx-auto mb-3 flex w-[100px] items-center justify-center gap-1 rounded-md bg-[#8B84EE] py-2 text-[12px] text-white transition-colors hover:bg-[#8bb11b] disabled:bg-gray-400 md:w-[120px] lg:w-[130px] xl:w-[140px] 2xl:w-[160px]"
                           onClick={handleDownloadMeme}
                           disabled={!selectedImage}
                         >
-                          {/* <MdDownloadForOffline /> */}
                           Downloadd
                         </button>
                       </div>
