@@ -27,6 +27,7 @@ import ColorPicker from "./ColorPicker"
 import FontSelector from "./FontSelector"
 import FontSizeSelector from "./FontSizeSelector"
 import ImageSelector from "./ImageSelector"
+import MemeCaractors from "./MemeCaractors"
 import TextEditor from "./TextEditor"
 import UpdateCustomImage from "./UpdateCustomImage"
 import "./memeEditor.css"
@@ -34,7 +35,7 @@ import store from "@/redux/store"
 import html2canvas from "html2canvas"
 import React, { useState, useRef, useEffect } from "react"
 import Draggable from "react-draggable"
-import { MdDownloadForOffline, MdImage } from "react-icons/md"
+import { MdArrowBackIos, MdDownloadForOffline, MdImage } from "react-icons/md"
 import { Provider } from "react-redux"
 import { Link } from "react-router-dom"
 
@@ -220,24 +221,47 @@ const MemeEditor = () => {
     setStickers(updatedStickers)
   }
 
-  const handleDownloadMeme = () => {
-    const selectedTextElement = document.getElementById(
-      `text-${selectedTextId}`,
-    )
-    if (selectedTextElement) {
-      selectedTextElement.style.border = "none"
-    }
+  const handleImage = (image) => {
+    setStickers([
+      ...stickers,
+      {
+        id: Date.now(),
+        src: image.src,
+        x: 50,
+        y: 50,
+        width: 100, // Default width
+        height: 100, // Default height
+      },
+    ])
+  }
 
+  const handleDownloadMeme = () => {
+    // Hide all sticker close buttons
+    const closeButtons = document.querySelectorAll(".sticker-close-button")
+    closeButtons.forEach((button) => {
+      button.style.display = "none"
+    })
+
+    // Capture the meme
     html2canvas(memeRef.current).then((canvas) => {
       const link = document.createElement("a")
       link.href = canvas.toDataURL("image/png")
       link.download = "meme.png"
       link.click()
 
-      if (selectedTextElement) {
-        selectedTextElement.style.border = "2px dotted #000"
-      }
+      // Restore the close buttons after download
+      closeButtons.forEach((button) => {
+        button.style.display = "block"
+      })
     })
+
+    setTimeout(() => {
+      goBack() // go main page
+    }, 500)
+  }
+
+  const goBack = () => {
+    window.location.reload()
   }
 
   return (
@@ -246,25 +270,28 @@ const MemeEditor = () => {
         <div
           className={`${selectedImage ? "container123 py-2" : ""}  bg-[#47464b] ${selectedImage ? "show-right-section" : ""}`}
         >
+          {/* sidebar1 */}
           {selectedImage && (
-            <div className="right-section mx-8 my-6 rounded-lg bg-[#16151a]">
+            <div className="right-section my-6 ml-4 rounded-lg bg-[#16151a]">
               {selectedImage && selectedTextId ? (
-                <div className="m-3 mb-[18px] flex w-fit items-end gap-4 lg:mx-auto lg:mb-6 lg:mt-4 lg:w-[120px] xl:w-[130px] xl:gap-6 2xl:w-[150px]">
+                <div className="flex h-20 w-full flex-row items-center justify-between p-4">
+                  <button className="go-back" onClick={goBack}>
+                    <MdArrowBackIos className="text-[30px]" />
+                  </button>
                   <img
                     src={TextIcon}
                     alt="My Image"
                     className="w-5 translate-y-[1px] md:w-6 lg:w-7 xl:w-8 xl:translate-y-[2px] 2xl:w-9"
                   />
-                  <p className="text-[13px] leading-none text-white md:text-[14px] lg:text-[15px] xl:text-[16px]">
+                  <p className="pr-3 text-[13px] leading-none text-white md:text-[14px] lg:text-[15px] xl:text-[16px]">
                     Text Editor
                   </p>
                 </div>
               ) : (
-                <p className="p-4 text-center">
+                <p className="text-center">
                   Pick a Meme Template to Start Editing Your Meme.
                 </p>
               )}
-
               <div className="flex">
                 {selectedImage && selectedTextId !== null && (
                   <div className="w-full">
@@ -326,7 +353,7 @@ const MemeEditor = () => {
                         onColorChange={handleBackgroundColorChange}
                       />
                     </div>
-                    <div className="mt-4 flex flex-col items-center justify-center space-y-4 sm:mt-8 sm:space-y-6">
+                    <div className="mt-4 flex items-center justify-center space-y-4 sm:mt-8 sm:flex-col sm:space-y-6">
                       <div>
                         <button
                           className="mx-auto flex w-[100px] items-center justify-center gap-1 rounded-md bg-[#5f5f5f] py-2 text-[12px] text-white transition-colors hover:bg-[#4e4e4e] md:w-[120px] lg:w-[130px] xl:w-[140px] 2xl:w-[160px]"
@@ -337,9 +364,9 @@ const MemeEditor = () => {
                         </button>
                       </div>
 
-                      <div>
+                      <div style={{margin: "0",}}>
                         {selectedImage && (
-                          <div className="mx-auto">
+                          <div className="mx-auto sm:mt-6">
                             {/* Hidden file input */}
                             <input
                               id="fileInput"
@@ -377,6 +404,16 @@ const MemeEditor = () => {
             </div>
           )}
 
+          {/* sidebar2 */}
+          {selectedImage && (
+            <div className="right-section mx-4 my-6 h-screen w-[200px] rounded-lg bg-[#16151a]">
+              {selectedImage && selectedTextId && (
+                <MemeCaractors handleImage={handleImage} />
+              )}
+            </div>
+          )}
+
+          {/* main-body */}
           <div
             className={`middle-section my-6 flex justify-center rounded-lg  ${selectedImage ? "mx-6 bg-[#212024]" : "mx-0 bg-[#000]"}`}
           >
@@ -491,6 +528,7 @@ const MemeEditor = () => {
                               }}
                             />
                             <div
+                              className="sticker-close-button" // Add this class
                               style={{
                                 position: "absolute",
                                 top: 5,
@@ -512,6 +550,7 @@ const MemeEditor = () => {
                                 X
                               </span>
                             </div>
+
                             <div
                               style={{
                                 position: "absolute",
