@@ -1,4 +1,3 @@
-
 import TextIcon from "../../assets/textEditor/Lowercase.png"
 import TemplateControl from "../MemeTemplates/TemplateControl"
 import RowCollage from "../collage/RowCollage"
@@ -20,6 +19,9 @@ import { MdArrowBackIos, MdDownloadForOffline, MdImage } from "react-icons/md"
 import { Provider } from "react-redux"
 import { Link } from "react-router-dom"
 
+import rotateImg from './../../assets/icons/rotate.svg';
+import resizeImg from './../../assets/icons/resize.png';
+
 const MemeEditor = () => {
   const [texts, setTexts] = useState([])
   const [selectedTextId, setSelectedTextId] = useState(null)
@@ -27,6 +29,8 @@ const MemeEditor = () => {
   const [selectedImage, setSelectedImage] = useState(null)
   const [backgroundColor, setBackgroundColor] = useState("#ffffff")
   const [stickers, setStickers] = useState([]) // State to manage stickers
+
+  const [rotate, setRotate] = useState(0)
 
   const memeRef = useRef(null)
 
@@ -163,9 +167,25 @@ const MemeEditor = () => {
   }
 
   const handleStickerResize = (stickerId, newWidth, newHeight) => {
+    // Ensure the minimum size for stickers to avoid disappearing
+    const minSize = 30 // Set minimum size for stickers
+
     const updatedStickers = stickers.map((sticker) =>
       sticker.id === stickerId
-        ? { ...sticker, width: newWidth, height: newHeight }
+        ? {
+            ...sticker,
+            width: Math.max(newWidth, minSize), // Prevent size going below the minimum
+            height: Math.max(newHeight, minSize),
+          }
+        : sticker,
+    )
+    setStickers(updatedStickers)
+  }
+
+  const handleStickerRotate = (stickerId, newRotation) => {
+    const updatedStickers = stickers.map((sticker) =>
+      sticker.id === stickerId
+        ? { ...sticker, rotation: newRotation }
         : sticker,
     )
     setStickers(updatedStickers)
@@ -180,7 +200,6 @@ const MemeEditor = () => {
 
     setStickers(updatedStickers)
   }
-
   const handleImage = (image) => {
     setStickers([
       ...stickers,
@@ -191,6 +210,7 @@ const MemeEditor = () => {
         y: 50,
         width: 100, // Default width
         height: 100, // Default height
+        rotation: 0, // Initial rotation is 0
       },
     ])
   }
@@ -342,7 +362,7 @@ const MemeEditor = () => {
                           onClick={handleDownloadMeme}
                           disabled={!selectedImage}
                         >
-                          Downloadd
+                          Download
                         </button>
                       </div>
                     </div>
@@ -464,17 +484,88 @@ const MemeEditor = () => {
                               width: `${sticker.width}px`,
                               height: `${sticker.height}px`,
                               cursor: "move",
-                              overflow: "visible", // Make sure delete button is visible
+                              overflow: "visible",
                             }}
                           >
+                            {/* Sticker Image */}
                             <img
                               src={sticker.src}
                               alt="Sticker"
                               style={{
                                 width: "100%",
                                 height: "100%",
+                                transform: `rotate(${sticker.rotation}deg)`,
                               }}
                             />
+                            {/* Rotate image */}
+                            <div
+                              className="sticker-close-button"
+                              style={{
+                                position: "absolute",
+                                top: -20,
+                                right: "50%",
+                                transform: "translateX(50%)",
+                                width: "15px",
+                                height: "15px",
+                                cursor: "pointer",
+                                backgroundImage: `url(${rotateImg})`, 
+                                backgroundSize: "cover",
+                                backgroundPosition: "center",
+                              }}
+                              onMouseDown={(e) => {
+                                e.stopPropagation()
+                                const stickerCenterX =
+                                  e.currentTarget.getBoundingClientRect().left +
+                                  sticker.width / 2
+                                const stickerCenterY =
+                                  e.currentTarget.getBoundingClientRect().top +
+                                  sticker.height / 2
+
+                                const startAngle = sticker.rotation
+                                const startX = e.clientX
+                                const startY = e.clientY
+
+                                const calculateAngle = (clientX, clientY) => {
+                                  const dx = clientX - stickerCenterX
+                                  const dy = clientY - stickerCenterY
+                                  return Math.atan2(dy, dx) * (180 / Math.PI)
+                                }
+
+                                const startRotationAngle = calculateAngle(
+                                  startX,
+                                  startY,
+                                )
+
+                                const onMouseMove = (moveEvent) => {
+                                  const currentRotationAngle = calculateAngle(
+                                    moveEvent.clientX,
+                                    moveEvent.clientY,
+                                  )
+                                  const newRotation =
+                                    startAngle +
+                                    (currentRotationAngle - startRotationAngle)
+                                  handleStickerRotate(sticker.id, newRotation)
+                                }
+
+                                const onMouseUp = () => {
+                                  document.removeEventListener(
+                                    "mousemove",
+                                    onMouseMove,
+                                  )
+                                  document.removeEventListener(
+                                    "mouseup",
+                                    onMouseUp,
+                                  )
+                                }
+
+                                document.addEventListener(
+                                  "mousemove",
+                                  onMouseMove,
+                                )
+                                document.addEventListener("mouseup", onMouseUp)
+                              }}
+                            />
+
                             <div
                               className="sticker-close-button" // Add this class
                               style={{
@@ -499,7 +590,9 @@ const MemeEditor = () => {
                               </span>
                             </div>
 
+                            {/* Resize Handle */}
                             <div
+                              className="sticker-close-button"
                               style={{
                                 position: "absolute",
                                 bottom: 0,
@@ -508,6 +601,9 @@ const MemeEditor = () => {
                                 height: "15px",
                                 cursor: "nwse-resize",
                                 backgroundColor: "rgba(255, 255, 255, 0.5)",
+                                backgroundImage: `url(${resizeImg})`, 
+                                backgroundSize: "cover",
+                                backgroundPosition: "center",
                               }}
                               onMouseDown={(e) => {
                                 e.stopPropagation()
