@@ -2,6 +2,8 @@ import TextIcon from "../../assets/textEditor/Lowercase.png"
 import TemplateControl from "../MemeTemplates/TemplateControl"
 import RowCollage from "../collage/RowCollage"
 import Collage from "../collage/collage"
+import resizeImg from "./../../assets/icons/resize.png"
+import rotateImg from "./../../assets/icons/rotate.svg"
 import BackgroundColorPicker from "./BgColorPicker"
 import ColorPicker from "./ColorPicker"
 import FontSelector from "./FontSelector"
@@ -19,12 +21,10 @@ import { MdArrowBackIos, MdDownloadForOffline, MdImage } from "react-icons/md"
 import { Provider } from "react-redux"
 import { Link } from "react-router-dom"
 
-import rotateImg from './../../assets/icons/rotate.svg';
-import resizeImg from './../../assets/icons/resize.png';
-
 const MemeEditor = () => {
   const [texts, setTexts] = useState([])
   const [selectedTextId, setSelectedTextId] = useState(null)
+  const [selectedStickerId, setSelectedStickerId] = useState(null)
   const [currentColor, setCurrentColor] = useState("#ffffff")
   const [selectedImage, setSelectedImage] = useState(null)
   const [backgroundColor, setBackgroundColor] = useState("#ffffff")
@@ -143,6 +143,9 @@ const MemeEditor = () => {
   const handleSelectText = (id) => {
     setSelectedTextId(id)
   }
+  const handleSelectSticker = (id) => {
+    setSelectedStickerId(id)
+  }
 
   const handleDeleteText = () => {
     if (selectedTextId !== null) {
@@ -226,8 +229,14 @@ const MemeEditor = () => {
     const selectedTextElement = document.getElementById(
       `text-${selectedTextId}`,
     )
-    if (selectedTextElement) {
-      selectedTextElement.style.border = "none"
+    selectedTextElement ? (selectedTextElement.style.border = "none") : ""
+
+    // Remove the dotted border from the selected text
+    const selectedStickerElement = document.getElementById(
+      `sticker-${selectedStickerId}`,
+    )
+    if (selectedStickerElement) {
+      selectedStickerElement.style.border = "none"
     }
 
     // Capture the meme
@@ -486,14 +495,20 @@ const MemeEditor = () => {
                               cursor: "move",
                               overflow: "visible",
                             }}
+                            onClick={() => handleSelectSticker(sticker.id)}
                           >
                             {/* Sticker Image */}
                             <img
+                              id={`sticker-${sticker.id}`}
                               src={sticker.src}
                               alt="Sticker"
                               style={{
                                 width: "100%",
                                 height: "100%",
+                                border:
+                                  sticker.id === selectedStickerId
+                                    ? "2px dotted #fff"
+                                    : "none",
                                 transform: `rotate(${sticker.rotation}deg)`,
                               }}
                             />
@@ -508,7 +523,7 @@ const MemeEditor = () => {
                                 width: "15px",
                                 height: "15px",
                                 cursor: "pointer",
-                                backgroundImage: `url(${rotateImg})`, 
+                                backgroundImage: `url(${rotateImg})`,
                                 backgroundSize: "cover",
                                 backgroundPosition: "center",
                               }}
@@ -601,7 +616,7 @@ const MemeEditor = () => {
                                 height: "15px",
                                 cursor: "nwse-resize",
                                 backgroundColor: "rgba(255, 255, 255, 0.5)",
-                                backgroundImage: `url(${resizeImg})`, 
+                                backgroundImage: `url(${resizeImg})`,
                                 backgroundSize: "cover",
                                 backgroundPosition: "center",
                               }}
