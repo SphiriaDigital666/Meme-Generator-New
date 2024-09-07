@@ -2,14 +2,13 @@ import TextIcon from "../../assets/textEditor/Lowercase.png"
 import TemplateControl from "../MemeTemplates/TemplateControl"
 import RowCollage from "../collage/RowCollage"
 import Collage from "../collage/collage"
-import resizeImg from "./../../assets/icons/resize.png"
-import rotateImg from "./../../assets/icons/rotate.svg"
 import BackgroundColorPicker from "./BgColorPicker"
 import ColorPicker from "./ColorPicker"
 import FontSelector from "./FontSelector"
 import FontSizeSelector from "./FontSizeSelector"
 import ImageSelector from "./ImageSelector"
 import MemeCaractors from "./MemeCaractors"
+import StickerEditor from "./StickerEditor"
 import TextEditor from "./TextEditor"
 import UpdateCustomImage from "./UpdateCustomImage"
 import "./memeEditor.css"
@@ -411,35 +410,27 @@ const MemeEditor = () => {
                 </div>
               )}
 
-              <div
-                style={{
-                  position: "relative",
-                  paddingLeft: "40px",
-                  paddingRight: "40px",
-                }}
-              >
-                <div
-                  ref={memeRef}
-                  style={{
-                    position: "relative",
-                    display: "inline-block",
-                  }}
-                >
+              <div className="relative px-[40px]">
+                <div ref={memeRef} className="relative inline-block">
                   {selectedImage ? (
                     <>
                       <div className="flex items-center justify-center">
                         <img
                           src={selectedImage}
                           alt="Meme"
-                          style={{
-                            width: "auto",
-                            height: "auto",
-                            backgroundColor: backgroundColor,
-                          }}
-                          className="background-image-div-1"
+                          style={{ backgroundColor: backgroundColor }}
+                          className="background-image-div-1 h-auto w-auto"
                         />
                       </div>
-
+                      <StickerEditor
+                        stickers={stickers}
+                        selectedStickerId={selectedStickerId}
+                        handleStickerDrag={handleStickerDrag}
+                        handleStickerResize={handleStickerResize}
+                        handleStickerRotate={handleStickerRotate}
+                        handleDeleteSticker={handleDeleteSticker}
+                        handleSelectSticker={handleSelectSticker}
+                      />
                       {texts.map((text) => (
                         <Draggable
                           key={text.id}
@@ -455,17 +446,14 @@ const MemeEditor = () => {
                         >
                           <div
                             id={`text-${text.id}`}
+                            className="absolute left-0 top-0 cursor-move"
                             style={{
-                              position: "absolute",
-                              top: 0,
-                              left: 0,
                               color: text.color,
                               fontSize: `${text.fontSize}px`,
                               fontWeight: text.fontWeight,
                               textDecoration: text.textDecoration,
                               fontFamily: text.fontFamily,
                               fontStyle: text.fontStyle, //ch2
-                              cursor: "move",
                               border:
                                 text.id === selectedTextId
                                   ? "2px dotted #fff"
@@ -477,193 +465,9 @@ const MemeEditor = () => {
                           </div>
                         </Draggable>
                       ))}
-                      {stickers.map((sticker) => (
-                        <Draggable
-                          key={sticker.id}
-                          defaultPosition={{ x: sticker.x, y: sticker.y }}
-                          onStop={(e, data) =>
-                            handleStickerDrag(sticker.id, data.x, data.y)
-                          }
-                        >
-                          <div
-                            style={{
-                              position: "absolute",
-                              top: 0,
-                              left: 0,
-                              width: `${sticker.width}px`,
-                              height: `${sticker.height}px`,
-                              cursor: "move",
-                              overflow: "visible",
-                            }}
-                            onClick={() => handleSelectSticker(sticker.id)}
-                          >
-                            {/* Sticker Image */}
-                            <img
-                              id={`sticker-${sticker.id}`}
-                              src={sticker.src}
-                              alt="Sticker"
-                              style={{
-                                width: "100%",
-                                height: "100%",
-                                border:
-                                  sticker.id === selectedStickerId
-                                    ? "2px dotted #fff"
-                                    : "none",
-                                transform: `rotate(${sticker.rotation}deg)`,
-                              }}
-                            />
-                            {/* Rotate image */}
-                            <div
-                              className="sticker-close-button"
-                              style={{
-                                position: "absolute",
-                                top: -20,
-                                right: "50%",
-                                transform: "translateX(50%)",
-                                width: "15px",
-                                height: "15px",
-                                cursor: "pointer",
-                                backgroundImage: `url(${rotateImg})`,
-                                backgroundSize: "cover",
-                                backgroundPosition: "center",
-                              }}
-                              onMouseDown={(e) => {
-                                e.stopPropagation()
-                                const stickerCenterX =
-                                  e.currentTarget.getBoundingClientRect().left +
-                                  sticker.width / 2
-                                const stickerCenterY =
-                                  e.currentTarget.getBoundingClientRect().top +
-                                  sticker.height / 2
-
-                                const startAngle = sticker.rotation
-                                const startX = e.clientX
-                                const startY = e.clientY
-
-                                const calculateAngle = (clientX, clientY) => {
-                                  const dx = clientX - stickerCenterX
-                                  const dy = clientY - stickerCenterY
-                                  return Math.atan2(dy, dx) * (180 / Math.PI)
-                                }
-
-                                const startRotationAngle = calculateAngle(
-                                  startX,
-                                  startY,
-                                )
-
-                                const onMouseMove = (moveEvent) => {
-                                  const currentRotationAngle = calculateAngle(
-                                    moveEvent.clientX,
-                                    moveEvent.clientY,
-                                  )
-                                  const newRotation =
-                                    startAngle +
-                                    (currentRotationAngle - startRotationAngle)
-                                  handleStickerRotate(sticker.id, newRotation)
-                                }
-
-                                const onMouseUp = () => {
-                                  document.removeEventListener(
-                                    "mousemove",
-                                    onMouseMove,
-                                  )
-                                  document.removeEventListener(
-                                    "mouseup",
-                                    onMouseUp,
-                                  )
-                                }
-
-                                document.addEventListener(
-                                  "mousemove",
-                                  onMouseMove,
-                                )
-                                document.addEventListener("mouseup", onMouseUp)
-                              }}
-                            />
-
-                            <div
-                              className="sticker-close-button" // Add this class
-                              style={{
-                                position: "absolute",
-                                top: 5,
-                                right: 5,
-                                backgroundColor: "red",
-                                borderRadius: "50%",
-                                width: "20px",
-                                height: "20px",
-                                display: "flex",
-                                alignItems: "center",
-                                justifyContent: "center",
-                                cursor: "pointer",
-                              }}
-                              onClick={() => handleDeleteSticker(sticker.id)}
-                            >
-                              <span
-                                style={{ fontSize: "14px", fontWeight: "bold" }}
-                              >
-                                X
-                              </span>
-                            </div>
-
-                            {/* Resize Handle */}
-                            <div
-                              className="sticker-close-button"
-                              style={{
-                                position: "absolute",
-                                bottom: 0,
-                                right: 0,
-                                width: "15px",
-                                height: "15px",
-                                cursor: "nwse-resize",
-                                backgroundColor: "rgba(255, 255, 255, 0.5)",
-                                backgroundImage: `url(${resizeImg})`,
-                                backgroundSize: "cover",
-                                backgroundPosition: "center",
-                              }}
-                              onMouseDown={(e) => {
-                                e.stopPropagation()
-                                const startX = e.clientX
-                                const startY = e.clientY
-                                const startWidth = sticker.width
-                                const startHeight = sticker.height
-
-                                const onMouseMove = (moveEvent) => {
-                                  const newWidth =
-                                    startWidth + (moveEvent.clientX - startX)
-                                  const newHeight =
-                                    startHeight + (moveEvent.clientY - startY)
-                                  handleStickerResize(
-                                    sticker.id,
-                                    newWidth,
-                                    newHeight,
-                                  )
-                                }
-
-                                const onMouseUp = () => {
-                                  document.removeEventListener(
-                                    "mousemove",
-                                    onMouseMove,
-                                  )
-                                  document.removeEventListener(
-                                    "mouseup",
-                                    onMouseUp,
-                                  )
-                                }
-
-                                document.addEventListener(
-                                  "mousemove",
-                                  onMouseMove,
-                                )
-                                document.addEventListener("mouseup", onMouseUp)
-                              }}
-                            />
-                          </div>
-                        </Draggable>
-                      ))}
                     </>
                   ) : (
                     <div className="w-full">
-                      {/* <UpdateCustomImage onImageSelect={handleImageSelect} /> */}
                       <ImageSelector onImageSelect={handleImageSelect} />
                     </div>
                   )}
@@ -673,7 +477,6 @@ const MemeEditor = () => {
                 ) : (
                   <div className="mt-16">
                     <Link to="/auth/home" className="text-[75px] text-[#456]">
-                      {/* <Collage /> */}
                       <RowCollage />
                     </Link>
                   </div>
