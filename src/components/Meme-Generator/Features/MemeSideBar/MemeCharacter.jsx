@@ -1,14 +1,14 @@
-import image11 from "../../assets/dog1.jpg"
-import image1 from "../../assets/image01.png"
-import image10 from "../../assets/image01.png"
-import image2 from "../../assets/image02.png"
-import image3 from "../../assets/image03.png"
-import image4 from "../../assets/image04.png"
-import image5 from "../../assets/image05.png"
-import image6 from "../../assets/image06.png"
-import image7 from "../../assets/image07.png"
-import image8 from "../../assets/image08.png"
-import image9 from "../../assets/image09.png"
+import image11 from "./../../../../assets/dog1.jpg"
+import image1 from "./../../../../assets/image01.png"
+import image10 from "./../../../../assets/image01.png"
+import image2 from "./../../../../assets/image02.png"
+import image3 from "./../../../../assets/image03.png"
+import image4 from "./../../../../assets/image04.png"
+import image5 from "./../../../../assets/image05.png"
+import image6 from "./../../../../assets/image06.png"
+import image7 from "./../../../../assets/image07.png"
+import image8 from "./../../../../assets/image08.png"
+import image9 from "./../../../../assets/image09.png"
 import React from "react"
 
 const images = [
@@ -25,7 +25,7 @@ const images = [
   { src: image10, click: false },
 ]
 
-const MemeCaractors = ({ handleImage }) => {
+const MemeCharacters = ({ handleImage }) => {
   const handleClickImage = (image) => {
     handleImage(image.src)
   }
@@ -74,4 +74,4 @@ const MemeCaractors = ({ handleImage }) => {
   )
 }
 
-export default MemeCaractors
+export default MemeCharacters
