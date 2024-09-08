@@ -1,7 +1,7 @@
 // StickerEditor.js
-import closeImg from "./../../assets/icons/close-button.png"
-import resizeImg from "./../../assets/icons/resize.png"
-import rotateImg from "./../../assets/icons/rotate.svg"
+import closeImg from "./../../../../assets/icons/close-button.png"
+import resizeImg from "./../../../../assets/icons/resize.png"
+import rotateImg from "./../../../../assets/icons/rotate.svg"
 import React from "react"
 import Draggable from "react-draggable"
 import { MdArrowBackIos } from "react-icons/md"

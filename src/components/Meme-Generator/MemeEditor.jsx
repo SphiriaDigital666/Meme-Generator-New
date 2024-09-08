@@ -7,9 +7,9 @@ import ColorPicker from "./ColorPicker"
 import FontSelector from "./FontSelector"
 import FontSizeSelector from "./FontSizeSelector"
 import ImageSelector from "./ImageSelector"
-import MemeCaractors from "./MemeCaractors"
-import StickerEditor from "./StickerEditor"
-import TextEditor from "./TextEditor"
+import StickerEditor from "./Features/Sticker/StickerEditor"
+import TextEditor from "./Features/MemeSideBar/TextEditor"
+import TextEditors from "./Features/Text/TextsEditor"
 import UpdateCustomImage from "./UpdateCustomImage"
 import "./memeEditor.css"
 import store from "@/redux/store"
@@ -19,6 +19,7 @@ import Draggable from "react-draggable"
 import { MdArrowBackIos, MdDownloadForOffline, MdImage } from "react-icons/md"
 import { Provider } from "react-redux"
 import { Link } from "react-router-dom"
+import MemeCharacters from "./Features/MemeSideBar/MemeCharacter"
 
 const MemeEditor = () => {
   const [texts, setTexts] = useState([])
@@ -27,7 +28,7 @@ const MemeEditor = () => {
   const [currentColor, setCurrentColor] = useState("#ffffff")
   const [selectedImage, setSelectedImage] = useState(null)
   const [backgroundColor, setBackgroundColor] = useState("#ffffff")
-  const [stickers, setStickers] = useState([]) // State to manage stickers
+  const [stickers, setStickers] = useState([])
 
   const [rotate, setRotate] = useState(0)
 
@@ -150,12 +151,10 @@ const MemeEditor = () => {
     if (selectedTextId !== null) {
       const newTexts = texts.filter((text) => text.id !== selectedTextId)
       setTexts(newTexts)
-
-      // Select the previous or next text after deletion, or null if no text remains
       if (newTexts.length > 0) {
-        setSelectedTextId(newTexts[0].id) // Select the first remaining text
+        setSelectedTextId(newTexts[0].id)
       } else {
-        setSelectedTextId(null) // No text left, set to null
+        setSelectedTextId(null)
       }
     }
   }
@@ -169,14 +168,13 @@ const MemeEditor = () => {
   }
 
   const handleStickerResize = (stickerId, newWidth, newHeight) => {
-    // Ensure the minimum size for stickers to avoid disappearing
-    const minSize = 30 // Set minimum size for stickers
+    const minSize = 30
 
     const updatedStickers = stickers.map((sticker) =>
       sticker.id === stickerId
         ? {
             ...sticker,
-            width: Math.max(newWidth, minSize), // Prevent size going below the minimum
+            width: Math.max(newWidth, minSize),
             height: Math.max(newHeight, minSize),
           }
         : sticker,
@@ -218,25 +216,18 @@ const MemeEditor = () => {
   }
 
   const handleDownloadMeme = () => {
-    // Hide all sticker close buttons and remove dotted borders from selected text
     const closeButtons = document.querySelectorAll(".sticker-close-button")
     closeButtons.forEach((button) => {
       button.style.display = "none"
     })
-
-    // Remove the dotted border from the selected text
     const selectedTextElement = document.getElementById(
       `text-${selectedTextId}`,
     )
     selectedTextElement ? (selectedTextElement.style.border = "none") : ""
-
-    // Remove the dotted border from the selected text
     const selectedStickerElement = document.getElementById(
       `sticker-${selectedStickerId}`,
     )
-    if (selectedStickerElement) {
-      selectedStickerElement.style.border = "none"
-    }
+    selectedStickerElement ? selectedStickerElement.style.border = "none": ''
 
     // Capture the meme
     html2canvas(memeRef.current).then((canvas) => {
@@ -384,7 +375,7 @@ const MemeEditor = () => {
           {selectedImage && (
             <div className="right-section mx-4 my-6 h-screen w-[200px] rounded-lg bg-[#16151a]">
               {selectedImage && selectedTextId && (
-                <MemeCaractors handleImage={handleImage} />
+                <MemeCharacters handleImage={handleImage} />
               )}
             </div>
           )}
@@ -431,40 +422,12 @@ const MemeEditor = () => {
                         handleDeleteSticker={handleDeleteSticker}
                         handleSelectSticker={handleSelectSticker}
                       />
-                      {texts.map((text) => (
-                        <Draggable
-                          key={text.id}
-                          defaultPosition={{ x: text.x, y: text.y }}
-                          onStop={(e, data) => {
-                            const updatedTexts = texts.map((t) =>
-                              t.id === text.id
-                                ? { ...t, x: data.x, y: data.y }
-                                : t,
-                            )
-                            setTexts(updatedTexts)
-                          }}
-                        >
-                          <div
-                            id={`text-${text.id}`}
-                            className="absolute left-0 top-0 cursor-move"
-                            style={{
-                              color: text.color,
-                              fontSize: `${text.fontSize}px`,
-                              fontWeight: text.fontWeight,
-                              textDecoration: text.textDecoration,
-                              fontFamily: text.fontFamily,
-                              fontStyle: text.fontStyle, //ch2
-                              border:
-                                text.id === selectedTextId
-                                  ? "2px dotted #fff"
-                                  : "none",
-                            }}
-                            onClick={() => handleSelectText(text.id)}
-                          >
-                            {text.text}
-                          </div>
-                        </Draggable>
-                      ))}
+                      <TextEditors
+                        texts={texts}
+                        selectedTextId={selectedTextId}
+                        handleSelectText={handleSelectText}
+                        setTexts={setTexts}
+                      />
                     </>
                   ) : (
                     <div className="w-full">
