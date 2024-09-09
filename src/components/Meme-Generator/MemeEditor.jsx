@@ -264,11 +264,11 @@ const MemeEditor = () => {
     <div>
       <Provider store={store}>
         <div className="flex items-center justify-center">
-          <h1 className="my-4 bg-none text-lg md:text-xl lg:text-2xl xl:text-3xl">
+          {/* <h1 className="my-4 bg-none text-lg md:text-xl lg:text-2xl xl:text-3xl">
             {selectedImage && selectedTextId
               ? "Meme Template"
               : "Meme Templates"}
-          </h1>
+          </h1> */}
         </div>
         <div
           className={`${selectedImage ? "container123 py-2" : ""}  bg-[#47464b] ${selectedImage ? "show-right-section" : ""}`}

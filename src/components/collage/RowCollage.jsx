@@ -33,9 +33,9 @@ const RowCollage = () => {
   return (
     <div className="">
       <div className="flex flex-row justify-center text-white md:font-normal">
-        <h1 className="text-lg md:text-xl lg:text-2xl xl:text-3xl">
+        {/* <h1 className="text-lg md:text-xl lg:text-2xl xl:text-3xl">
           Add Collage
-        </h1>
+        </h1> */}
       </div>
       <div className="grid grid-cols-2 gap-2 p-2 lg:grid-cols-10 lg:gap-4">
         {items.map((item, index) => (
