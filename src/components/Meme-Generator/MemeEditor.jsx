@@ -21,6 +21,7 @@ import Draggable from "react-draggable"
 import { MdArrowBackIos, MdDownloadForOffline, MdImage } from "react-icons/md"
 import { Provider } from "react-redux"
 import { Link } from "react-router-dom"
+import canvasImg from "./../../assets/icons/canvasImage.jpg"
 
 const MemeEditor = () => {
   const [texts, setTexts] = useState([])
@@ -261,7 +262,7 @@ const MemeEditor = () => {
     <div>
       <Provider store={store}>
         <div className="flex items-center justify-center">
-          <h1 className="mb-4 text-lg md:text-xl lg:text-2xl xl:text-3xl">
+          <h1 className="my-4 text-lg md:text-xl lg:text-2xl xl:text-3xl bg-none">
             {selectedImage && selectedTextId
               ? "Meme Template"
               : "Meme Templates"}
@@ -306,6 +307,11 @@ const MemeEditor = () => {
           {/* main-body */}
           <div
             className={`middle-section my-6 flex items-center justify-center rounded-lg  ${selectedImage ? "mx-6 bg-[#212024]" : "mx-0 bg-[#000]"}`}
+            style={{
+              backgroundImage: selectedImage ? `url(${canvasImg})` : "none",
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }}
           >
             <div>
               <div className="relative px-[40px]">
