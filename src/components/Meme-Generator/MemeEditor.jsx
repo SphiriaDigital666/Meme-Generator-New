@@ -321,7 +321,7 @@ const MemeEditor = () => {
                   ref={memeRef}
                   className="relative inline-block h-full w-full items-center"
                 >
-                  <MainCanvas
+                  {/* <MainCanvas
                     selectedImage={selectedImage}
                     backgroundColor={backgroundColor}
                     stickers={stickers}
@@ -338,15 +338,77 @@ const MemeEditor = () => {
                     handleImageSelect={handleImageSelect}
                     handleDownloadMeme={handleDownloadMeme}
                     setSelectedImage={setSelectedImage}
-                  />
+                  /> */}
                 </div>
                 {selectedImage && selectedTextId ? (
                   <div> </div>
                 ) : (
-                  <div className="mt-16">
-                    <Link to="/auth/home" className="text-[75px] text-[#456]">
-                      <RowCollage />
-                    </Link>
+                  <div className="gradient-div my-8 flex items-center justify-center p-10 backdrop-blur-sm">
+                    <div class="grid grid-cols-12 gap-8 ">
+                      <div className="bg  col-span-8 border-indigo-500">
+                        <div>
+                          <p className="mb-2 text-[25px] font-semibold text-[#fff]">
+                            Collage
+                          </p>
+                          <div className="rounded-xl bg-[#fff] bg-opacity-50 px-10 py-8 shadow-md drop-shadow-md">
+                            <Link
+                              to="/auth/home"
+                              className="text-[75px] text-[#456]"
+                            >
+                              <RowCollage />
+                            </Link>
+                          </div>
+
+                          {/* Meme Templates */}
+
+                          <p className="mb-2 mt-6 text-[25px] font-semibold text-[#fff]">
+                            Custom Templates
+                          </p>
+                          <div className="rounded-xl bg-[#fff] bg-opacity-50 px-10 py-8 shadow-md drop-shadow-md">
+                            <MainCanvas
+                              selectedImage={selectedImage}
+                              backgroundColor={backgroundColor}
+                              stickers={stickers}
+                              handleStickerDrag={handleStickerDrag}
+                              handleStickerResize={handleStickerResize}
+                              handleStickerRotate={handleStickerRotate}
+                              handleDeleteSticker={handleDeleteSticker}
+                              handleSelectSticker={handleSelectSticker}
+                              selectedStickerId={selectedStickerId}
+                              texts={texts}
+                              selectedTextId={selectedTextId}
+                              handleSelectText={handleSelectText}
+                              setTexts={setTexts}
+                              handleImageSelect={handleImageSelect}
+                              handleDownloadMeme={handleDownloadMeme}
+                              setSelectedImage={setSelectedImage}
+                            />
+                          </div>
+
+                          {/* Pre defined meme templates */}
+
+                          <p className="mb-2 mt-6 text-[25px] font-semibold text-[#fff]">
+                            Meme Templates
+                          </p>
+
+                          <div className="w-max rounded-xl bg-[#fff] bg-opacity-50 px-10 py-8 shadow-md drop-shadow-md">
+                            {/* <ImageSelector
+                            onImageSelect={handleImageSelect}
+                          /> */}
+
+                            <PreDefinedTemplates
+                              onImageSelect={handleImageSelect}
+                            />
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="col-span-4 flex items-center justify-center border-l-2">
+                        <img src={memeImageRight} />
+                      </div>
+                    </div>
+                    {/* <UpdateCustomImage onImageSelect={handleImageSelect} /> */}
+                    {/* Collage */}
                   </div>
                 )}
               </div>
