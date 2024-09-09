@@ -1,6 +1,8 @@
+import memeImageRight from "../../assets/meme-editor-right-img.png"
 import TemplateControl from "../MemeTemplates/TemplateControl"
 import RowCollage from "../collage/RowCollage"
 import Collage from "../collage/collage"
+import canvasImg from "./../../assets/icons/canvasImage.jpg"
 import BackgroundColorPicker from "./BgColorPicker"
 import ColorPicker from "./ColorPicker"
 import MainCanvas from "./Features/MemeSideBar/MainCanvas"
@@ -12,6 +14,7 @@ import TextEditors from "./Features/Text/TextsEditor"
 import FontSelector from "./FontSelector"
 import FontSizeSelector from "./FontSizeSelector"
 import ImageSelector from "./ImageSelector"
+import PreDefinedTemplates from "./Pre-Defined-Templates"
 import UpdateCustomImage from "./UpdateCustomImage"
 import "./memeEditor.css"
 import store from "@/redux/store"
@@ -21,7 +24,6 @@ import Draggable from "react-draggable"
 import { MdArrowBackIos, MdDownloadForOffline, MdImage } from "react-icons/md"
 import { Provider } from "react-redux"
 import { Link } from "react-router-dom"
-import canvasImg from "./../../assets/icons/canvasImage.jpg"
 
 const MemeEditor = () => {
   const [texts, setTexts] = useState([])
@@ -262,14 +264,14 @@ const MemeEditor = () => {
     <div>
       <Provider store={store}>
         <div className="flex items-center justify-center">
-          <h1 className="my-4 text-lg md:text-xl lg:text-2xl xl:text-3xl bg-none">
+          {/* <h1 className="my-4 bg-none text-lg md:text-xl lg:text-2xl xl:text-3xl">
             {selectedImage && selectedTextId
               ? "Meme Template"
               : "Meme Templates"}
-          </h1>
+          </h1> */}
         </div>
         <div
-          className={`${selectedImage ? "container123 py-2" : ""}  bg-[#47464b] ${selectedImage ? "show-right-section" : ""}`}
+          className={`${selectedImage ? "container123 py-2" : "main-container"}  ${selectedImage ? "show-right-section" : ""}`}
         >
           {/* sidebar1 */}
           {selectedImage && (
@@ -306,7 +308,7 @@ const MemeEditor = () => {
 
           {/* main-body */}
           <div
-            className={`middle-section my-6 flex items-center justify-center rounded-lg  ${selectedImage ? "mx-6 bg-[#212024]" : "mx-0 bg-[#000]"}`}
+            className={`middle-section flex justify-center ${selectedImage ? "mx-6 bg-[#212024]" : "main-container mx-0 flex items-center justify-center "}`}
             style={{
               backgroundImage: selectedImage ? `url(${canvasImg})` : "none",
               backgroundSize: "cover",
@@ -314,12 +316,12 @@ const MemeEditor = () => {
             }}
           >
             <div>
-              <div className="relative px-[40px]">
+              <div className="relative px-[100px]">
                 <div
                   ref={memeRef}
                   className="relative inline-block h-full w-full items-center"
                 >
-                  <MainCanvas
+                  {/* <MainCanvas
                     selectedImage={selectedImage}
                     backgroundColor={backgroundColor}
                     stickers={stickers}
@@ -336,15 +338,77 @@ const MemeEditor = () => {
                     handleImageSelect={handleImageSelect}
                     handleDownloadMeme={handleDownloadMeme}
                     setSelectedImage={setSelectedImage}
-                  />
+                  /> */}
                 </div>
                 {selectedImage && selectedTextId ? (
                   <div> </div>
                 ) : (
-                  <div className="mt-16">
-                    <Link to="/auth/home" className="text-[75px] text-[#456]">
-                      <RowCollage />
-                    </Link>
+                  <div className="gradient-div my-8 flex items-center justify-center p-10 backdrop-blur-sm">
+                    <div class="grid grid-cols-12 gap-8 ">
+                      <div className="bg  col-span-8 border-indigo-500">
+                        <div>
+                          <p className="mb-2 text-[25px] font-semibold text-[#fff]">
+                            Collage
+                          </p>
+                          <div className="rounded-xl bg-[#fff] bg-opacity-50 px-10 py-8 shadow-md drop-shadow-md">
+                            <Link
+                              to="/auth/home"
+                              className="text-[75px] text-[#456]"
+                            >
+                              <RowCollage />
+                            </Link>
+                          </div>
+
+                          {/* Meme Templates */}
+
+                          <p className="mb-2 mt-6 text-[25px] font-semibold text-[#fff]">
+                            Custom Templates
+                          </p>
+                          <div className="rounded-xl bg-[#fff] bg-opacity-50 px-10 py-8 shadow-md drop-shadow-md">
+                            <MainCanvas
+                              selectedImage={selectedImage}
+                              backgroundColor={backgroundColor}
+                              stickers={stickers}
+                              handleStickerDrag={handleStickerDrag}
+                              handleStickerResize={handleStickerResize}
+                              handleStickerRotate={handleStickerRotate}
+                              handleDeleteSticker={handleDeleteSticker}
+                              handleSelectSticker={handleSelectSticker}
+                              selectedStickerId={selectedStickerId}
+                              texts={texts}
+                              selectedTextId={selectedTextId}
+                              handleSelectText={handleSelectText}
+                              setTexts={setTexts}
+                              handleImageSelect={handleImageSelect}
+                              handleDownloadMeme={handleDownloadMeme}
+                              setSelectedImage={setSelectedImage}
+                            />
+                          </div>
+
+                          {/* Pre defined meme templates */}
+
+                          <p className="mb-2 mt-6 text-[25px] font-semibold text-[#fff]">
+                            Meme Templates
+                          </p>
+
+                          <div className="w-max rounded-xl bg-[#fff] bg-opacity-50 px-10 py-8 shadow-md drop-shadow-md">
+                            {/* <ImageSelector
+                            onImageSelect={handleImageSelect}
+                          /> */}
+
+                            <PreDefinedTemplates
+                              onImageSelect={handleImageSelect}
+                            />
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="col-span-4 flex items-center justify-center border-l-2">
+                        <img src={memeImageRight} />
+                      </div>
+                    </div>
+                    {/* <UpdateCustomImage onImageSelect={handleImageSelect} /> */}
+                    {/* Collage */}
                   </div>
                 )}
               </div>
