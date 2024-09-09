@@ -2,7 +2,7 @@ import memeImageRight from "../../assets/meme-editor-right-img.png"
 import TemplateControl from "../MemeTemplates/TemplateControl"
 import RowCollage from "../collage/RowCollage"
 import Collage from "../collage/collage"
-import canvasImg from "./../../assets/icons/canvasImage.jpg"
+import canvasImg from "./../../assets/icons/canvasImage.png"
 import BackgroundColorPicker from "./BgColorPicker"
 import ColorPicker from "./ColorPicker"
 import MainCanvas from "./Features/MemeSideBar/MainCanvas"
@@ -308,7 +308,7 @@ const MemeEditor = () => {
 
           {/* main-body */}
           <div
-            className={`middle-section flex justify-center ${selectedImage ? "mx-6 bg-[#212024]" : "main-container mx-0 flex items-center justify-center "}`}
+            className={`middle-section flex justify-center items-center ${selectedImage ? "mx-6 bg-[#212024]" : "main-container mx-0 flex items-center justify-center "}`}
             style={{
               backgroundImage: selectedImage ? `url(${canvasImg})` : "none",
               backgroundSize: "cover",
@@ -321,7 +321,7 @@ const MemeEditor = () => {
                   ref={memeRef}
                   className="relative inline-block h-full w-full items-center"
                 >
-                  {/* <MainCanvas
+                  <MainCanvas
                     selectedImage={selectedImage}
                     backgroundColor={backgroundColor}
                     stickers={stickers}
@@ -338,7 +338,7 @@ const MemeEditor = () => {
                     handleImageSelect={handleImageSelect}
                     handleDownloadMeme={handleDownloadMeme}
                     setSelectedImage={setSelectedImage}
-                  /> */}
+                  />
                 </div>
                 {selectedImage && selectedTextId ? (
                   <div> </div>
@@ -364,27 +364,6 @@ const MemeEditor = () => {
                           <p className="mb-2 mt-6 text-[25px] font-semibold text-[#fff]">
                             Custom Templates
                           </p>
-                          <div className="rounded-xl bg-[#fff] bg-opacity-50 px-10 py-8 shadow-md drop-shadow-md">
-                            <MainCanvas
-                              selectedImage={selectedImage}
-                              backgroundColor={backgroundColor}
-                              stickers={stickers}
-                              handleStickerDrag={handleStickerDrag}
-                              handleStickerResize={handleStickerResize}
-                              handleStickerRotate={handleStickerRotate}
-                              handleDeleteSticker={handleDeleteSticker}
-                              handleSelectSticker={handleSelectSticker}
-                              selectedStickerId={selectedStickerId}
-                              texts={texts}
-                              selectedTextId={selectedTextId}
-                              handleSelectText={handleSelectText}
-                              setTexts={setTexts}
-                              handleImageSelect={handleImageSelect}
-                              handleDownloadMeme={handleDownloadMeme}
-                              setSelectedImage={setSelectedImage}
-                            />
-                          </div>
-
                           {/* Pre defined meme templates */}
 
                           <p className="mb-2 mt-6 text-[25px] font-semibold text-[#fff]">
