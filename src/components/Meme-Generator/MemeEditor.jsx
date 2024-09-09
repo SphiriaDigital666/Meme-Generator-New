@@ -343,7 +343,7 @@ const MemeEditor = () => {
                 {selectedImage && selectedTextId ? (
                   <div> </div>
                 ) : (
-                  <div className="gradient-div my-8 flex items-center justify-center p-10 backdrop-blur-sm">
+                  <div className="gradient-div my-8 flex items-center justify-center p-10 shadow-md drop-shadow-md backdrop-blur-sm">
                     <div class="grid grid-cols-12 gap-8 ">
                       <div className="bg  col-span-8 border-indigo-500">
                         <div>
