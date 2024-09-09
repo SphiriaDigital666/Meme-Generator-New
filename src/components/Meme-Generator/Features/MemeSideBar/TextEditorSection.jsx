@@ -29,6 +29,10 @@ const TextEditorSection = ({
 }) => {
   const selectedText = texts.find((text) => text.id === selectedTextId)
 
+  const changeImage = () => {
+    window.location.reload()
+  }
+
   return (
     <div className="right-section my-6 ml-4 rounded-lg bg-[#16151a]">
       {selectedTextId ? (
@@ -96,7 +100,7 @@ const TextEditorSection = ({
             <div className="mt-4 flex items-center justify-center flex-col">
               <button
                 className="mx-3 mt-4 flex w-[100px] items-center justify-center gap-1 rounded-md bg-[#5f5f5f] py-2 text-[10px] leading-none text-white md:w-[110px] md:text-[11px] lg:mx-0 lg:w-[120px] lg:text-[12px] xl:w-[130px] xl:text-[13px] 2xl:w-[150px] 2xl:text-[14px]"
-                onClick={() => setSelectedImage(null)} // Option to clear the image
+                onClick={() => changeImage()} // Option to clear the image
               >
                 <MdImage className="-translate-y-[1px]" />
                 Change Image
