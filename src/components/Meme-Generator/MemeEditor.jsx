@@ -316,7 +316,7 @@ const MemeEditor = () => {
             }}
           >
             <div>
-              <div className="relative px-[40px]">
+              <div className="relative px-[100px]">
                 <div
                   ref={memeRef}
                   className="relative inline-block h-full w-full items-center"

@@ -44,7 +44,7 @@ const PreDefinedTemplates = ({ onImageSelect }) => {
               key={index}
               src={image.src}
               alt={`Meme ${index}`}
-              className="mr-2.5 h-auto w-[100px] cursor-pointer rounded-md border-[3px] border-gray-300 "
+              className="mr-2.5 h-auto w-[115px] cursor-pointer rounded-md border-[3px] border-gray-300 "
               onClick={() => handleSelect(image)}
             />
           ))}
