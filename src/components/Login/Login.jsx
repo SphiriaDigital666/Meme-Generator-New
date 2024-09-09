@@ -1,12 +1,12 @@
 import React from 'react'
 import Navbar from '../NavBar/NavBar'
-import MemeEditor from '../Meme-Generator/MemeEditor'
+import MemeGenerator from '../Meme-Generator/MemeEditor'
 
 const Login = () => {
   return (
     <div>
         <Navbar />
-        <MemeEditor />
+        <MemeGenerator />
       
     </div>
   )
