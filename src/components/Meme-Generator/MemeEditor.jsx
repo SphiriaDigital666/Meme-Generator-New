@@ -1,6 +1,8 @@
+import memeImageRight from "../../assets/meme-editor-right-img.png"
 import TemplateControl from "../MemeTemplates/TemplateControl"
 import RowCollage from "../collage/RowCollage"
 import Collage from "../collage/collage"
+import canvasImg from "./../../assets/icons/canvasImage.jpg"
 import BackgroundColorPicker from "./BgColorPicker"
 import ColorPicker from "./ColorPicker"
 import MainCanvas from "./Features/MemeSideBar/MainCanvas"
@@ -21,7 +23,6 @@ import Draggable from "react-draggable"
 import { MdArrowBackIos, MdDownloadForOffline, MdImage } from "react-icons/md"
 import { Provider } from "react-redux"
 import { Link } from "react-router-dom"
-import canvasImg from "./../../assets/icons/canvasImage.jpg"
 
 const MemeEditor = () => {
   const [texts, setTexts] = useState([])
@@ -262,7 +263,7 @@ const MemeEditor = () => {
     <div>
       <Provider store={store}>
         <div className="flex items-center justify-center">
-          <h1 className="my-4 text-lg md:text-xl lg:text-2xl xl:text-3xl bg-none">
+          <h1 className="my-4 bg-none text-lg md:text-xl lg:text-2xl xl:text-3xl">
             {selectedImage && selectedTextId
               ? "Meme Template"
               : "Meme Templates"}
