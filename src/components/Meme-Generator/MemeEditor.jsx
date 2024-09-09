@@ -271,7 +271,7 @@ const MemeEditor = () => {
           </h1> */}
         </div>
         <div
-          className={`${selectedImage ? "container123 py-2" : ""}  bg-[#47464b] ${selectedImage ? "show-right-section" : ""}`}
+          className={`${selectedImage ? "container123 py-2" : "main-container"}  ${selectedImage ? "show-right-section" : ""}`}
         >
           {/* sidebar1 */}
           {selectedImage && (
@@ -308,7 +308,7 @@ const MemeEditor = () => {
 
           {/* main-body */}
           <div
-            className={`middle-section flex justify-center   ${selectedImage ? "mx-6 bg-[#212024]" : "main-container mx-0 flex items-center justify-center "}`}
+            className={`middle-section flex justify-center ${selectedImage ? "mx-6 bg-[#212024]" : "main-container mx-0 flex items-center justify-center "}`}
             style={{
               backgroundImage: selectedImage ? `url(${canvasImg})` : "none",
               backgroundSize: "cover",
