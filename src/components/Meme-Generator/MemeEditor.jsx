@@ -1,15 +1,17 @@
-import TextIcon from "../../assets/textEditor/Lowercase.png"
 import TemplateControl from "../MemeTemplates/TemplateControl"
 import RowCollage from "../collage/RowCollage"
 import Collage from "../collage/collage"
 import BackgroundColorPicker from "./BgColorPicker"
 import ColorPicker from "./ColorPicker"
+import MainCanvas from "./Features/MemeSideBar/MainCanvas"
+import MemeCharacters from "./Features/MemeSideBar/MemeCharacter"
+import TextEditor from "./Features/MemeSideBar/TextEditor"
+import TextEditorSection from "./Features/MemeSideBar/TextEditorSection"
+import StickerEditor from "./Features/Sticker/StickerEditor"
+import TextEditors from "./Features/Text/TextsEditor"
 import FontSelector from "./FontSelector"
 import FontSizeSelector from "./FontSizeSelector"
 import ImageSelector from "./ImageSelector"
-import StickerEditor from "./Features/Sticker/StickerEditor"
-import TextEditor from "./Features/MemeSideBar/TextEditor"
-import TextEditors from "./Features/Text/TextsEditor"
 import UpdateCustomImage from "./UpdateCustomImage"
 import "./memeEditor.css"
 import store from "@/redux/store"
@@ -19,7 +21,6 @@ import Draggable from "react-draggable"
 import { MdArrowBackIos, MdDownloadForOffline, MdImage } from "react-icons/md"
 import { Provider } from "react-redux"
 import { Link } from "react-router-dom"
-import MemeCharacters from "./Features/MemeSideBar/MemeCharacter"
 
 const MemeEditor = () => {
   const [texts, setTexts] = useState([])
@@ -227,7 +228,7 @@ const MemeEditor = () => {
     const selectedStickerElement = document.getElementById(
       `sticker-${selectedStickerId}`,
     )
-    selectedStickerElement ? selectedStickerElement.style.border = "none": ''
+    selectedStickerElement ? (selectedStickerElement.style.border = "none") : ""
 
     // Capture the meme
     html2canvas(memeRef.current).then((canvas) => {
@@ -259,116 +260,38 @@ const MemeEditor = () => {
   return (
     <div>
       <Provider store={store}>
+        <div className="flex items-center justify-center">
+          <h1 className="mb-4 text-lg md:text-xl lg:text-2xl xl:text-3xl">
+            {selectedImage && selectedTextId
+              ? "Meme Template"
+              : "Meme Templates"}
+          </h1>
+        </div>
         <div
           className={`${selectedImage ? "container123 py-2" : ""}  bg-[#47464b] ${selectedImage ? "show-right-section" : ""}`}
         >
           {/* sidebar1 */}
           {selectedImage && (
-            <div className="right-section my-6 ml-4 rounded-lg bg-[#16151a]">
-              {selectedImage && selectedTextId ? (
-                <div className="flex h-20 w-full flex-row items-center justify-between p-4">
-                  <button className="go-back" onClick={goBack}>
-                    <MdArrowBackIos className="text-[30px]" />
-                  </button>
-                  <img
-                    src={TextIcon}
-                    alt="My Image"
-                    className="w-5 translate-y-[1px] md:w-6 lg:w-7 xl:w-8 xl:translate-y-[2px] 2xl:w-9"
-                  />
-                  <p className="pr-3 text-[13px] leading-none text-white md:text-[14px] lg:text-[15px] xl:text-[16px]">
-                    Text Editor
-                  </p>
-                </div>
-              ) : (
-                <p className="text-center">
-                  Pick a Meme Template to Start Editing Your Meme.
-                </p>
-              )}
-              <div className="flex">
-                {selectedImage && selectedTextId !== null && (
-                  <div className="w-full">
-                    <div className=" border-b border-t border-[#535353] px-4 py-4">
-                      <TextEditor
-                        text={texts.find((text) => text.id === selectedTextId)}
-                        onTextChange={handleTextChange}
-                        onAddText={handleAddText}
-                        onDeleteText={handleDeleteText}
-                        onToggleBold={handleToggleBold}
-                        onToggleItalic={handleToggleItalic}
-                        onToggleUnderline={handleToggleUnderline}
-                        isAddDisabled={texts.length >= 4}
-                      />
-                    </div>
-
-                    <h3 className="mb-2 pl-3 pt-3 text-white sm:text-[14px] lg:text-[15px] 2xl:text-[16px]">
-                      Select Text Color
-                    </h3>
-                    <div className="flex items-center justify-center border-b border-[#535353] px-4 py-4">
-                      <ColorPicker
-                        currentColor={currentColor}
-                        onColorChange={handleColorChange}
-                      />
-                    </div>
-
-                    <h3 className="mb-2 pl-3 pt-3 text-white sm:text-[14px] lg:text-[15px] 2xl:text-[16px]">
-                      Select Font Style
-                    </h3>
-                    <div className="flex items-center justify-center border-b border-[#535353] px-4 py-4">
-                      <FontSelector
-                        currentFontFamily={
-                          texts.find((text) => text.id === selectedTextId)
-                            ?.fontFamily
-                        }
-                        onFontFamilyChange={handleFontFamilyChange}
-                      />
-                    </div>
-
-                    <h3 className="mb-2 pl-3 pt-3 text-white sm:text-[14px] lg:text-[15px] 2xl:text-[16px]">
-                      Select Font Size
-                    </h3>
-                    <div className="flex items-center justify-center border-b border-[#535353] px-4 py-4">
-                      <FontSizeSelector
-                        currentSize={
-                          texts.find((text) => text.id === selectedTextId)
-                            ?.fontSize
-                        }
-                        onSizeChange={handleFontSizeChange}
-                      />
-                    </div>
-
-                    <h3 className="mb-2 pl-3 pt-3 text-white sm:text-[14px] lg:text-[15px] 2xl:text-[16px]">
-                      Background Color
-                    </h3>
-                    <div className="flex items-center justify-center border-b border-[#535353] px-4 py-4">
-                      <BackgroundColorPicker
-                        currentColor={backgroundColor}
-                        onColorChange={handleBackgroundColorChange}
-                      />
-                    </div>
-                    <div className="mt-4 flex items-center justify-center space-y-4 sm:mt-8 sm:flex-col sm:space-y-6">
-                      <div>
-                        <button
-                          className="mx-auto flex w-[100px] items-center justify-center gap-1 rounded-md bg-[#5f5f5f] py-2 text-[12px] text-white transition-colors hover:bg-[#4e4e4e] md:w-[120px] lg:w-[130px] xl:w-[140px] 2xl:w-[160px]"
-                          onClick={() => setSelectedImage(null)} // Option to clear the image
-                        >
-                          {/* <MdImage /> */}
-                          Change Image
-                        </button>
-                      </div>
-                      <div>
-                        <button
-                          className="mx-auto mb-3 flex w-[100px] items-center justify-center gap-1 rounded-md bg-[#8B84EE] py-2 text-[12px] text-white transition-colors hover:bg-[#8bb11b] disabled:bg-gray-400 md:w-[120px] lg:w-[130px] xl:w-[140px] 2xl:w-[160px]"
-                          onClick={handleDownloadMeme}
-                          disabled={!selectedImage}
-                        >
-                          Download
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                )}
-              </div>
-            </div>
+            <TextEditorSection
+              texts={texts}
+              selectedTextId={selectedTextId}
+              currentColor={currentColor}
+              backgroundColor={backgroundColor}
+              handleTextChange={handleTextChange}
+              handleAddText={handleAddText}
+              handleDeleteText={handleDeleteText}
+              handleToggleBold={handleToggleBold}
+              handleToggleItalic={handleToggleItalic}
+              handleToggleUnderline={handleToggleUnderline}
+              handleColorChange={handleColorChange}
+              handleFontFamilyChange={handleFontFamilyChange}
+              handleFontSizeChange={handleFontSizeChange}
+              handleBackgroundColorChange={handleBackgroundColorChange}
+              setSelectedImage={setSelectedImage}
+              selectedImage={selectedImage}
+              handleDownloadMeme={handleDownloadMeme}
+              goBack={goBack}
+            />
           )}
 
           {/* sidebar2 */}
@@ -382,58 +305,32 @@ const MemeEditor = () => {
 
           {/* main-body */}
           <div
-            className={`middle-section my-6 flex justify-center rounded-lg  ${selectedImage ? "mx-6 bg-[#212024]" : "mx-0 bg-[#000]"}`}
+            className={`middle-section my-6 flex items-center justify-center rounded-lg  ${selectedImage ? "mx-6 bg-[#212024]" : "mx-0 bg-[#000]"}`}
           >
             <div>
-              {selectedImage && selectedTextId ? (
-                <div className="ml-4 mt-4 flex items-center">
-                  <div className="flex flex-row justify-center text-white md:font-normal">
-                    <h1 className="mb-4 text-lg md:text-xl lg:text-2xl xl:text-3xl">
-                      Meme Template
-                    </h1>
-                  </div>
-                </div>
-              ) : (
-                <div className="flex flex-row justify-center text-white md:font-normal">
-                  <h1 className="mb-4 text-lg md:text-xl lg:text-2xl xl:text-3xl">
-                    Meme Templates
-                  </h1>
-                </div>
-              )}
-
               <div className="relative px-[40px]">
-                <div ref={memeRef} className="relative inline-block">
-                  {selectedImage ? (
-                    <>
-                      <div className="flex items-center justify-center">
-                        <img
-                          src={selectedImage}
-                          alt="Meme"
-                          style={{ backgroundColor: backgroundColor }}
-                          className="background-image-div-1 h-auto w-auto"
-                        />
-                      </div>
-                      <StickerEditor
-                        stickers={stickers}
-                        selectedStickerId={selectedStickerId}
-                        handleStickerDrag={handleStickerDrag}
-                        handleStickerResize={handleStickerResize}
-                        handleStickerRotate={handleStickerRotate}
-                        handleDeleteSticker={handleDeleteSticker}
-                        handleSelectSticker={handleSelectSticker}
-                      />
-                      <TextEditors
-                        texts={texts}
-                        selectedTextId={selectedTextId}
-                        handleSelectText={handleSelectText}
-                        setTexts={setTexts}
-                      />
-                    </>
-                  ) : (
-                    <div className="w-full">
-                      <ImageSelector onImageSelect={handleImageSelect} />
-                    </div>
-                  )}
+                <div
+                  ref={memeRef}
+                  className="relative inline-block h-full w-full items-center"
+                >
+                  <MainCanvas
+                    selectedImage={selectedImage}
+                    backgroundColor={backgroundColor}
+                    stickers={stickers}
+                    handleStickerDrag={handleStickerDrag}
+                    handleStickerResize={handleStickerResize}
+                    handleStickerRotate={handleStickerRotate}
+                    handleDeleteSticker={handleDeleteSticker}
+                    handleSelectSticker={handleSelectSticker}
+                    selectedStickerId={selectedStickerId}
+                    texts={texts}
+                    selectedTextId={selectedTextId}
+                    handleSelectText={handleSelectText}
+                    setTexts={setTexts}
+                    handleImageSelect={handleImageSelect}
+                    handleDownloadMeme={handleDownloadMeme}
+                    setSelectedImage={setSelectedImage}
+                  />
                 </div>
                 {selectedImage && selectedTextId ? (
                   <div> </div>
@@ -442,33 +339,6 @@ const MemeEditor = () => {
                     <Link to="/auth/home" className="text-[75px] text-[#456]">
                       <RowCollage />
                     </Link>
-                  </div>
-                )}
-
-                {selectedImage && selectedTextId !== null && (
-                  <div className="w-full">
-                    <div className="mb-6 mt-4 flex flex-col items-center justify-center">
-                      <div className="block sm:hidden">
-                        <button
-                          className="mx-3 mt-4 flex w-[100px] items-center justify-center gap-1 rounded-md bg-[#5f5f5f] py-2 text-[10px] leading-none text-white md:w-[110px] md:text-[11px] lg:mx-0 lg:w-[120px] lg:text-[12px] xl:w-[130px] xl:text-[13px] 2xl:w-[150px] 2xl:text-[14px]"
-                          onClick={() => setSelectedImage(null)} // Option to clear the image
-                        >
-                          <MdImage className="-translate-y-[1px]" />
-                          Change Image
-                        </button>
-                      </div>
-
-                      <div className="block sm:hidden">
-                        <button
-                          className="mx-3 mt-4 flex w-[100px] items-center justify-center gap-1 rounded-md bg-[#8B84EE] py-2 text-[10px] leading-none text-white md:w-[110px] md:text-[11px] lg:mx-0 lg:w-[120px] lg:text-[12px] xl:w-[130px] xl:text-[13px] 2xl:w-[150px] 2xl:text-[14px]"
-                          onClick={handleDownloadMeme}
-                          disabled={!selectedImage}
-                        >
-                          <MdDownloadForOffline />
-                          Download
-                        </button>
-                      </div>
-                    </div>
                   </div>
                 )}
               </div>
