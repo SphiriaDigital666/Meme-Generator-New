@@ -13,7 +13,7 @@ const HeroSection = () => {
 
   return (
     <div>
-      {/* <Navbar /> */}
+      <Navbar />
 
       <div className="hero-background-section-01">
         <div className="mb-12 flex items-center justify-center pt-[110px]">
@@ -42,7 +42,10 @@ const HeroSection = () => {
         </div>
 
         <div className="flex items-center justify-center">
-          <div className="w-max rounded-sm bg-gradient-to-r from-[#cf2784] to-[#363cca] px-4 py-2">
+          <div
+            className="w-max cursor-pointer rounded-sm bg-gradient-to-r from-[#cf2784] to-[#363cca] px-4 py-2"
+            onClick={goToHome}
+          >
             <p>Create Memes Now</p>
           </div>
         </div>
