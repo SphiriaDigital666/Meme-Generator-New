@@ -1,0 +1,8 @@
+.pre-defined-template-bg {
+  background-image: url("../../assets/meme-templates/pre-defined-templates-bg.png");
+  background-size: cover; /* This will make the image cover the entire div */
+  background-position: center; /* This will center the image within the div */
+  background-repeat: no-repeat; /* Prevents the image from repeating */
+  width: 100%;
+  height: 94vh;
+}
