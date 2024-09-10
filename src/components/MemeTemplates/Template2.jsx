@@ -188,7 +188,7 @@ const Template2 = () => {
             onClick={downloadImage}
             className=" mr-5 mt-3 rounded bg-green-500 px-2 py-2 text-white hover:bg-green-600"
           >
-            Download
+            <FaDownload />
           </button>
         </div>
       </div>
@@ -215,7 +215,6 @@ const Template2 = () => {
             />
 
             <div className="flex flex-col items-center justify-center  rounded-full bg-[#2F2F3B] px-[13px] py-10">
-              {" "}
               <div className="flex w-full items-center justify-center border-b-[1px] border-white pb-6 pt-6">
                 <label
                   htmlFor="file-upload-template1"
@@ -226,6 +225,7 @@ const Template2 = () => {
                   </div>
                 </label>
               </div>
+
               <div className="rounded-md">
                 <div className="flex w-full items-center justify-center border-b-[1px] border-white pb-5 pt-5">
                   <input
