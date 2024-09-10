@@ -1,0 +1,10 @@
+.hero-background-section-01 {
+  background-image: url("../assets/hero/background-01.jpg");
+  background-size: cover;
+  /* background-position: center; */
+  background-repeat: no-repeat;
+
+  width: 100vw;
+  height: 100vh;
+  /* position: relative; */
+}
