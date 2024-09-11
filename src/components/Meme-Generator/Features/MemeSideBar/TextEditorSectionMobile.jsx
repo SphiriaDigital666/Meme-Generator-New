@@ -7,7 +7,7 @@ import FontSizeSelector from "./../../FontSizeSelector"
 import React from "react"
 import { MdArrowBackIos, MdDownloadForOffline, MdImage } from "react-icons/md"
 
-const TextEditorSection = ({
+const TextEditorSectionMobile = ({
   texts,
   selectedTextId,
   currentColor,
@@ -34,10 +34,10 @@ const TextEditorSection = ({
   }
 
   return (
-    <div className="right-section ml-4 rounded-lg bg-[#16151a] hidden sm:inline">
+    <div className="right-section ml-4 inline rounded-lg bg-[#16151a] sm:hidden">
       {selectedTextId ? (
         <>
-          <div className="flex h-20 w-full flex-row items-center justify-between p-4">
+          <div className="flex h-10 w-full flex-row items-center justify-between p-4">
             <button className="go-back" onClick={goBack}>
               <MdArrowBackIos className="text-[30px]" />
             </button>
@@ -64,40 +64,39 @@ const TextEditorSection = ({
             />
           </div>
 
-          <div className="settings-section">
-            <h3 className="mb-2 pl-3 pt-3 text-white">Select Text Color</h3>
-            <div className="flex items-center justify-center border-b border-[#535353] px-4 py-4">
-              <ColorPicker
-                currentColor={currentColor}
-                onColorChange={handleColorChange}
-              />
-            </div>
-
-            <h3 className="mb-2 pl-3 pt-3 text-white">Select Font Style</h3>
-            <div className="flex items-center justify-center border-b border-[#535353] px-4 py-4">
-              <FontSelector
-                currentFontFamily={selectedText?.fontFamily}
-                onFontFamilyChange={handleFontFamilyChange}
-              />
-            </div>
-
-            <h3 className="mb-2 pl-3 pt-3 text-white">Select Font Size</h3>
-            <div className="flex items-center justify-center border-b border-[#535353] px-4 py-4">
-              <FontSizeSelector
-                currentSize={selectedText?.fontSize}
-                onSizeChange={handleFontSizeChange}
-              />
-            </div>
-
-            <h3 className="mb-2 pl-3 pt-3 text-white">Background Color</h3>
-            <div className="flex items-center justify-center border-b border-[#535353] px-4 py-4">
-              <BackgroundColorPicker
+          <div className="settings-section px-2">
+            <div className=" flex flex-row justify-between border-b border-[#535353]">
+              <div className="flex flex-col">
+                <h3 className="text-white text-[14px]">Text Color</h3>
+                <ColorPicker
+                  currentColor={currentColor}
+                  onColorChange={handleColorChange}
+                />
+              </div>
+              <div className="flex flex-col">
+                <h3 className="text-white text-[14px]">Font Style</h3>
+                <FontSelector
+                  currentFontFamily={selectedText?.fontFamily}
+                  onFontFamilyChange={handleFontFamilyChange}
+                />
+              </div>
+              <div className="flex flex-col">
+                <h3 className="text-white text-[14px]">Font Size</h3>
+                <FontSizeSelector
+                  currentSize={selectedText?.fontSize}
+                  onSizeChange={handleFontSizeChange}
+                />
+              </div>
+              <div className="flex flex-col">
+                <h3 className="text-white text-[14px]">Background</h3>
+                <BackgroundColorPicker
                 currentColor={backgroundColor}
                 onColorChange={handleBackgroundColorChange}
               />
+              </div>
             </div>
 
-            <div className="mt-4 flex items-center justify-center flex-col">
+            <div className="mt-4 flex flex-row items-center justify-center">
               <button
                 className="mx-3 mt-4 flex w-[100px] items-center justify-center gap-1 rounded-md bg-[#5f5f5f] py-2 text-[10px] leading-none text-white md:w-[110px] md:text-[11px] lg:mx-0 lg:w-[120px] lg:text-[12px] xl:w-[130px] xl:text-[13px] 2xl:w-[150px] 2xl:text-[14px]"
                 onClick={() => changeImage()} // Option to clear the image
@@ -125,4 +124,4 @@ const TextEditorSection = ({
   )
 }
 
-export default TextEditorSection
+export default TextEditorSectionMobile

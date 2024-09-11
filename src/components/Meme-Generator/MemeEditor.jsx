@@ -7,8 +7,10 @@ import BackgroundColorPicker from "./BgColorPicker"
 import ColorPicker from "./ColorPicker"
 import MainCanvas from "./Features/MemeSideBar/MainCanvas"
 import MemeCharacters from "./Features/MemeSideBar/MemeCharacter"
+import MemeCharactersMobile from "./Features/MemeSideBar/MemeCharacterMobile"
 import TextEditor from "./Features/MemeSideBar/TextEditor"
 import TextEditorSection from "./Features/MemeSideBar/TextEditorSection"
+import TextEditorSectionMobile from "./Features/MemeSideBar/TextEditorSectionMobile"
 import StickerEditor from "./Features/Sticker/StickerEditor"
 import TextEditors from "./Features/Text/TextsEditor"
 import FontSelector from "./FontSelector"
@@ -257,19 +259,33 @@ const MemeEditor = () => {
   }
 
   const goBack = () => {
-    window.location.reload()
+    setSelectedImage(null)
+    setTexts([]) // Clear texts
+    setStickers([]) // Clear stickers
+    setSelectedTextId(null) // Reset selected text ID
+    setSelectedStickerId(null) // Reset selected sticker ID
   }
 
   return (
-    <div>
+    <div className="overflow-hidden">
       <Provider store={store}>
-        <div className="flex items-center justify-center">
-          {/* <h1 className="my-4 bg-none text-lg md:text-xl lg:text-2xl xl:text-3xl">
-            {selectedImage && selectedTextId
-              ? "Meme Template"
-              : "Meme Templates"}
-          </h1> */}
+        <div className="hidden items-center justify-center sm:flex">
+          {
+            <h1 className="my-4 bg-none text-lg md:text-xl lg:text-2xl xl:text-3xl">
+              {selectedImage && selectedTextId
+                ? "Meme Template"
+                : "Meme Templates"}
+            </h1>
+          }
         </div>
+
+        {/* responsive meme select */}
+        <MemeCharactersMobile
+          handleImage={handleImage}
+          selectedImage={selectedImage}
+          selectedTextId={selectedTextId}
+        />
+
         <div
           className={`${selectedImage ? "container123 py-2" : "main-container"}  ${selectedImage ? "show-right-section" : ""}`}
         >
@@ -298,25 +314,23 @@ const MemeEditor = () => {
           )}
 
           {/* sidebar2 */}
-          {selectedImage && (
-            <div className="right-section mx-4 my-6 h-screen w-[200px] rounded-lg bg-[#16151a]">
-              {selectedImage && selectedTextId && (
-                <MemeCharacters handleImage={handleImage} />
-              )}
-            </div>
-          )}
+          <MemeCharacters
+            handleImage={handleImage}
+            selectedImage={selectedImage}
+            selectedTextId={selectedTextId}
+          />
 
           {/* main-body */}
           <div
-            className={`middle-section flex justify-center items-center ${selectedImage ? "mx-6 bg-[#212024]" : "main-container mx-0 flex items-center justify-center "}`}
+            className={`middle-section flex items-center justify-center ${selectedImage ? "mx-6 bg-[#212024]" : "main-container mx-0 flex items-center justify-center "}`}
             style={{
               backgroundImage: selectedImage ? `url(${canvasImg})` : "none",
               backgroundSize: "cover",
               backgroundPosition: "center",
             }}
           >
-            <div>
-              <div className="relative px-[100px]">
+            <div className="">
+              <div className="relative py-3 sm:py-0">
                 <div
                   ref={memeRef}
                   className="relative inline-block h-full w-full items-center"
@@ -344,7 +358,7 @@ const MemeEditor = () => {
                   <div> </div>
                 ) : (
                   <div className="gradient-div my-8 flex items-center justify-center p-10 shadow-md drop-shadow-md backdrop-blur-sm">
-                    <div class="grid grid-cols-12 gap-8 ">
+                    <div className="grid grid-cols-12 gap-8 ">
                       <div className="bg  col-span-8 border-indigo-500">
                         <div>
                           <p className="mb-2 text-[25px] font-semibold text-[#fff]">
@@ -393,6 +407,30 @@ const MemeEditor = () => {
               </div>
             </div>
           </div>
+
+          {/* responsive text */}
+          {selectedImage && (
+            <TextEditorSectionMobile
+              texts={texts}
+              selectedTextId={selectedTextId}
+              currentColor={currentColor}
+              backgroundColor={backgroundColor}
+              handleTextChange={handleTextChange}
+              handleAddText={handleAddText}
+              handleDeleteText={handleDeleteText}
+              handleToggleBold={handleToggleBold}
+              handleToggleItalic={handleToggleItalic}
+              handleToggleUnderline={handleToggleUnderline}
+              handleColorChange={handleColorChange}
+              handleFontFamilyChange={handleFontFamilyChange}
+              handleFontSizeChange={handleFontSizeChange}
+              handleBackgroundColorChange={handleBackgroundColorChange}
+              setSelectedImage={setSelectedImage}
+              selectedImage={selectedImage}
+              handleDownloadMeme={handleDownloadMeme}
+              goBack={goBack}
+            />
+          )}
         </div>
       </Provider>
     </div>

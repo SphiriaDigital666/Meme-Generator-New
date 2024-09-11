@@ -30,9 +30,9 @@ const ColorPicker = ({ currentColor, onColorChange }) => {
       </h3> */}
       <button
         onClick={() => setShowColorPicker(!showColorPicker)}
+        className="w-full sm:w-[70px]"
         style={{
           backgroundColor: currentColor,
-          width: "70px",
           height: "30px",
           border: "2px solid white",
           cursor: "pointer",
