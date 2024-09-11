@@ -1,5 +1,4 @@
 import image1 from "./../../../../assets/characters/image01.png"
-import image10 from "./../../../../assets/characters/image01.png"
 import image2 from "./../../../../assets/characters/image02.png"
 import image3 from "./../../../../assets/characters/image03.png"
 import image4 from "./../../../../assets/characters/image04.png"
@@ -9,7 +8,11 @@ import image7 from "./../../../../assets/characters/image07.png"
 import image8 from "./../../../../assets/characters/image08.png"
 import image9 from "./../../../../assets/characters/image09.png"
 import image11 from "./../../../../assets/dog1.jpg"
+import * as $ from "jquery"
 import React from "react"
+import OwlCarousel from "react-owl-carousel"
+
+// Correct import for jQuery
 
 const images = [
   { src: image11, click: true },
@@ -22,10 +25,41 @@ const images = [
   { src: image7, click: false },
   { src: image8, click: false },
   { src: image9, click: false },
-  { src: image10, click: false },
 ]
 
-const MemeCharacters = ({ handleImage, selectedImage, selectedTextId }) => {
+const MemeCharactersMobile = ({
+  handleImage,
+  selectedImage,
+  selectedTextId,
+}) => {
+  const options = {
+    responsive: {
+      0: {
+        items: 4.5,
+      },
+      400: {
+        items: 1,
+      },
+      600: {
+        items: 1,
+      },
+      700: {
+        items: 1,
+      },
+      800: {
+        items: 2,
+      },
+      1000: {
+        items: 3,
+      },
+    },
+    nav: false,
+    dots: false,
+    loop: true,
+    margin: 20,
+    autoplay: true,
+  }
+
   const handleClickImage = (image) => {
     handleImage(image.src)
   }
@@ -48,12 +82,18 @@ const MemeCharacters = ({ handleImage, selectedImage, selectedTextId }) => {
     document.getElementById("fileInput").click()
   }
   return (
-    <>
+    <div className="flex sm:hidden">
       {selectedImage && (
-        <div className="right-section mx-4 w-full rounded-lg bg-[#16151a] sm:w-[200px]">
+        <div className="right-section  w-full rounded-lg bg-[#16151a]">
           {selectedImage && selectedTextId && (
-            <div className="mt-5 hidden h-screen w-full flex-col items-center overflow-y-auto sm:flex">
-              <div className="mx-auto sm:mt-6">
+            <OwlCarousel
+              className="owl-theme section inline sm:hidden"
+              loop
+              margin={20}
+              autoplay
+              {...options}
+            >
+              <div className="mx-auto">
                 <input
                   id="fileInput"
                   className="hidden"
@@ -66,7 +106,7 @@ const MemeCharacters = ({ handleImage, selectedImage, selectedTextId }) => {
                 <div key={i}>
                   <img
                     src={image.src}
-                    className="h-32 w-32 cursor-pointer border-b-2 border-indigo-500 pb-1"
+                    className="cursor-pointer"
                     alt=""
                     onClick={() =>
                       image.click
@@ -76,12 +116,12 @@ const MemeCharacters = ({ handleImage, selectedImage, selectedTextId }) => {
                   />
                 </div>
               ))}
-            </div>
+            </OwlCarousel>
           )}
         </div>
       )}
-    </>
+    </div>
   )
 }
 
-export default MemeCharacters
+export default MemeCharactersMobile
