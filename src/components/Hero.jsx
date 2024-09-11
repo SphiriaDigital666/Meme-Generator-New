@@ -12,7 +12,7 @@ const HeroSection = () => {
   }
 
   return (
-    <div>
+    <div className="overflow-x-hidden">
       <Navbar />
 
       <div className="hero-background-section-01">
@@ -50,7 +50,11 @@ const HeroSection = () => {
           </div>
         </div>
       </div>
-      {/* <Footer /> */}
+
+      <div className="hero-background-section-02"></div>
+
+      <div className="hero-background-section-03"></div>
+      <Footer />
     </div>
   )
 }
