@@ -15,26 +15,32 @@ const HeroSection = () => {
     <div className="overflow-x-hidden">
       <Navbar />
 
-      <div className="hero-background-section-01">
+      <div className="hero-background-section-01 px-3">
         <div className="mb-12 flex items-center justify-center pt-[110px]">
           <div className="w-max rounded-xl bg-white bg-opacity-20 px-12 py-8 backdrop-blur-xl">
-            <div className="mb-4 flex items-center justify-center">
-              <p className="text-[64px] font-semibold text-white">
+            <div className="mb-4 items-center justify-center sm:flex">
+              <p className="text-center text-[30px] font-semibold text-white sm:text-[35px] md:text-[35px] lg:text-[45px] xl:text-[55px] 2xl:text-[64px]">
                 Create more
               </p>
 
-              <img src={memesLogo} alt="meme logo" className="w-[275px] px-4" />
+              <div className="flex items-center justify-center">
+                <img
+                  src={memesLogo}
+                  alt="meme logo"
+                  className="w-[150px] px-4 sm:w-[150px] md:w-[190px] lg:w-[205px] xl:w-[235px] 2xl:w-[275px]"
+                />
+              </div>
 
-              <p className="text-[64px] font-semibold text-white">
+              <p className="text-center text-[30px] font-semibold text-white sm:text-[35px] md:text-[35px] lg:text-[45px] xl:text-[55px] 2xl:text-[64px]">
                 in less time!
               </p>
             </div>
 
-            <p className="text-center text-[20px] font-normal text-white">
+            <p className="mb-4 text-center text-[15px] font-normal text-white sm:mb-0 sm:text-[16px] md:text-[17px] lg:text-[18px] xl:text-[19px] 2xl:text-[20px]">
               Create and share memes instantly with Meme! Choose from templates
               or upload your own images.
             </p>
-            <p className="text-center text-[20px] font-normal text-white">
+            <p className="text-center text-[15px]  font-normal text-white sm:text-[16px] md:text-[17px] lg:text-[18px] xl:text-[19px] 2xl:text-[20px]">
               Perfect for beginners and pros. Start creating and join the meme
               revolution!
             </p>
