@@ -37,17 +37,17 @@ const RowCollage = () => {
           Add Collage
         </h1> */}
       </div>
-      <div className="grid grid-cols-2 gap-2 p-2 lg:grid-cols-10 lg:gap-4">
+      <div className="grid grid-cols-2 justify-items-center gap-2 p-2 sm:grid-cols-4 md:grid-cols-5 lg:gap-4">
         {items.map((item, index) => (
           <div
             key={index}
-            className="cursor-pointer"
+            className="w-[100%] max-w-[115px] cursor-pointer sm:w-fit sm:max-w-none "
             onClick={() => selectTemplate(index)}
           >
             <img
               src={item.imgSrc}
               alt={`Collage ${index + 1}`}
-              className="h-auto w-full select-none rounded-t-lg transition-opacity duration-150 ease-linear"
+              className="h-auto w-full select-none rounded-t-lg transition-opacity duration-150 ease-linear sm:w-fit"
             />
           </div>
         ))}

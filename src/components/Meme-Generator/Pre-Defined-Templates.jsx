@@ -36,15 +36,15 @@ const PreDefinedTemplates = ({ onImageSelect }) => {
   }
 
   return (
-    <div className="relative overflow-hidden">
+    <div className="relative">
       <div>
-        <div className="flex">
+        <div className="flex flex-col items-center gap-8 sm:flex-row sm:flex-wrap sm:justify-around sm:gap-0">
           {images.map((image, index) => (
             <img
               key={index}
               src={image.src}
               alt={`Meme ${index}`}
-              className="mr-2.5 h-auto w-[115px] cursor-pointer rounded-md border-[3px] border-gray-300 "
+              className="mr-2.5 h-auto w-[52%] cursor-pointer rounded-md border-[3px] border-gray-300 sm:w-[30%] md:max-w-[190px]"
               onClick={() => handleSelect(image)}
             />
           ))}
