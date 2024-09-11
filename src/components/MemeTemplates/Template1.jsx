@@ -128,7 +128,7 @@ const Template1 = () => {
   }
 
   return (
-    <div className="pre-defined-template-bg relative flex h-screen flex-col  items-center">
+    <div className="pre-defined-template-bg relative flex  h-screen flex-col items-center">
       <div className="flex w-full items-start justify-between">
         <div>
           <Link to="/auth/main">

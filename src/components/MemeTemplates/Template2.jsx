@@ -1,5 +1,6 @@
 import defaultImage from "../../assets/meme-templates/default-pic.jpg"
 import defaultBackground from "../../assets/meme-templates/pre-defined-templates-default-img.jpg"
+import "./Template.css"
 import React, { useState, useRef } from "react"
 import { FaBold, FaItalic, FaUnderline } from "react-icons/fa"
 import { FaDownload } from "react-icons/fa"
@@ -176,7 +177,7 @@ const Template2 = () => {
   }
 
   return (
-    <div className="pre-defined-template-bg flex h-full flex-col items-center">
+    <div className="pre-defined-template-bg relative flex  h-screen flex-col items-center">
       <div className="flex w-full items-start justify-between ">
         <div>
           <Link to="/auth/main">
@@ -203,7 +204,7 @@ const Template2 = () => {
       />
 
       {selectedImage && (
-        <div className="relative mt-4 flex items-center gap-16 rounded-md  bg-white bg-opacity-30 px-[170px] py-[60px] shadow-md drop-shadow-md backdrop-blur-md">
+        <div className="relative mt-4 w-max items-center rounded-md bg-white  bg-opacity-30 px-[40px] py-[40px] shadow-md drop-shadow-md backdrop-blur-md sm:flex sm:gap-12 sm:px-[40px] sm:py-[40px] md:gap-12 md:px-[40px] md:py-[40px] lg:gap-16 lg:px-[70px] lg:py-[50px] xl:px-[100px] xl:py-[50px] 2xl:px-[170px] 2xl:py-[60px]">
           <div className=" mb-6 items-center ">
             <input
               type="file"
@@ -214,78 +215,151 @@ const Template2 = () => {
               style={{ display: "none" }}
             />
 
-            <div className="flex flex-col items-center justify-center  rounded-full bg-[#2F2F3B] px-[13px] py-10">
-              <div className="flex w-full items-center justify-center border-b-[1px] border-white pb-6 pt-6">
-                <label
-                  htmlFor="file-upload-template1"
-                  className="cursor-pointer rounded  text-[45px] text-white"
-                >
-                  <div>
-                    <TbPhotoPlus className="text-[25px]" />
+            <div className="flex flex-col items-center justify-center  rounded-full bg-[#2F2F3B] px-[5px] py-1">
+              <div className="hidden sm:block">
+                <div className="flex  flex-col items-center  justify-center rounded-full bg-[#2F2F3B] sm:px-[6px] sm:py-2 ">
+                  <div className="flex w-full items-center justify-center border-b-[1px] border-white sm:pb-4 sm:pt-4 md:pb-5 md:pt-5">
+                    <label
+                      htmlFor="file-upload-template1"
+                      className="cursor-pointer rounded  text-[45px] text-white"
+                    >
+                      <div>
+                        <TbPhotoPlus className="text-[25px]" />
+                      </div>
+                    </label>
                   </div>
-                </label>
+
+                  <div className="flex w-full items-center justify-center border-b-[1px] border-white sm:pb-4 sm:pt-4 md:pb-5 md:pt-5">
+                    <input
+                      type="color"
+                      value={textColor}
+                      onChange={handleTextColorChange}
+                      className="h-[30px] w-[30px] "
+                    />
+                  </div>
+
+                  <div className="flex w-full items-center justify-center border-b-[1px] border-white sm:pb-4 sm:pt-4 md:pb-5 md:pt-5">
+                    <button
+                      onClick={toggleBold}
+                      className={`rounded md:p-2  ${
+                        isBold
+                          ? ", bg-[#b0b0b0] text-white"
+                          : ", bg-[#2F2F3B] text-white"
+                      } `}
+                    >
+                      <FaBold />
+                    </button>
+                  </div>
+
+                  <div className="flex w-full items-center justify-center border-b-[1px] border-white sm:pb-4 sm:pt-4 md:pb-5 md:pt-5">
+                    <button
+                      onClick={toggleItalic}
+                      className={`rounded md:p-2 ${
+                        isItalic
+                          ? "bg-[#b0b0b0] text-white"
+                          : ", text-white] bg-[#2F2F3B]"
+                      } `}
+                    >
+                      <FaItalic />
+                    </button>
+                  </div>
+
+                  <div className="flex w-full items-center justify-center border-b-[1px] border-white sm:pb-4 sm:pt-4 md:pb-5 md:pt-5">
+                    <button
+                      onClick={toggleUnderline}
+                      className={`rounded text-white md:p-2 ${
+                        isUnderline
+                          ? "bg-[#b0b0b0] text-white"
+                          : ", bg-[#2F2F3B] text-[#343434]"
+                      } `}
+                    >
+                      <FaUnderline />
+                    </button>
+                  </div>
+
+                  <div className="flex w-full items-center justify-center sm:pb-4 sm:pt-4 md:pb-5 md:pt-5">
+                    <button onClick={downloadImage}>
+                      <FaDownload />
+                    </button>
+                  </div>
+                </div>
               </div>
 
-              <div className="rounded-md">
-                <div className="flex w-full items-center justify-center border-b-[1px] border-white pb-5 pt-5">
-                  <input
-                    type="color"
-                    value={textColor}
-                    onChange={handleTextColorChange}
-                    className="h-[30px] w-[30px]"
-                  />
-                </div>
+              {/* Text editor bar for large screens and below */}
+              <div className="block sm:hidden">
+                <div className="flex items-center justify-center gap-4 rounded-full bg-[#2F2F3B] px-2">
+                  <div className="flex w-full items-center justify-center pb-2 pt-2">
+                    <label
+                      htmlFor="file-upload-template1"
+                      className="cursor-pointer rounded  text-[45px] text-white"
+                    >
+                      <div>
+                        <TbPhotoPlus className="text-[20px]" />
+                      </div>
+                    </label>
+                  </div>
 
-                <div className="flex w-full items-center justify-center border-b-[1px] border-white pb-5 pt-5">
-                  <button
-                    onClick={toggleBold}
-                    className={`rounded p-2  ${
-                      isBold
-                        ? ", bg-[#b0b0b0] text-white"
-                        : ", bg-[#2F2F3B] text-white"
-                    } `}
-                  >
-                    <FaBold />
-                  </button>
-                </div>
+                  <div className="flex w-full items-center justify-center  pb-2 pt-2">
+                    <input
+                      type="color"
+                      value={textColor}
+                      onChange={handleTextColorChange}
+                      className="h-[30px] w-[30px] "
+                    />
+                  </div>
 
-                <div className="flex w-full items-center justify-center border-b-[1px] border-white pb-5 pt-5">
-                  <button
-                    onClick={toggleItalic}
-                    className={`rounded p-2 ${
-                      isItalic
-                        ? "bg-[#b0b0b0] text-white"
-                        : ", text-white] bg-[#2F2F3B]"
-                    } `}
-                  >
-                    <FaItalic />
-                  </button>
-                </div>
+                  <div className="flex w-full items-center justify-center  pb-2 pt-2">
+                    <button
+                      onClick={toggleBold}
+                      className={`rounded p-2  ${
+                        isBold
+                          ? ", bg-[#b0b0b0] text-white"
+                          : ", bg-[#2F2F3B] text-white"
+                      } `}
+                    >
+                      <FaBold className="text-[15px]" />
+                    </button>
+                  </div>
 
-                <div className="flex w-full items-center justify-center border-b-[1px] border-white pb-5 pt-5">
-                  <button
-                    onClick={toggleUnderline}
-                    className={`rounded p-2 text-white ${
-                      isUnderline
-                        ? "bg-[#b0b0b0] text-white"
-                        : ", bg-[#2F2F3B] text-[#343434]"
-                    } `}
-                  >
-                    <FaUnderline />
-                  </button>
-                </div>
+                  <div className="flex w-full items-center justify-center  pb-2 pt-2">
+                    <button
+                      onClick={toggleItalic}
+                      className={`rounded p-2 ${
+                        isItalic
+                          ? "bg-[#b0b0b0] text-white"
+                          : ", text-white] bg-[#2F2F3B]"
+                      } `}
+                    >
+                      <FaItalic className="text-[15px]" />
+                    </button>
+                  </div>
 
-                <div className="flex w-full items-center justify-center pb-5 pt-5">
-                  <button onClick={downloadImage}>
-                    <FaDownload />
-                  </button>
-                </div>
+                  <div className="flex w-full items-center justify-center  pb-2 pt-2">
+                    <button
+                      onClick={toggleUnderline}
+                      className={`rounded p-2 text-white ${
+                        isUnderline
+                          ? "bg-[#b0b0b0] text-white"
+                          : ", bg-[#2F2F3B] text-[#343434]"
+                      } `}
+                    >
+                      <FaUnderline className="text-[15px]" />
+                    </button>
+                  </div>
+
+                  <div className="flex w-full items-center justify-center pb-2 pt-2">
+                    <button onClick={downloadImage}>
+                      <FaDownload className="text-[15px]" />
+                    </button>
+                  </div>
+                </div>{" "}
               </div>
             </div>
           </div>
+
           <div className="mb-10">
             <div
-              className="w-[800px] cursor-pointer bg-black bg-opacity-70 py-2 text-center text-xl text-white "
+              className="w-[260px] cursor-pointer bg-black bg-opacity-70 py-2 text-center text-xl text-white sm:w-[400px] md:w-[520px] lg:w-[700px] lg:p-4 lg:text-[35px] xl:w-[800px] 2xl:w-[800px] "
               onClick={handleTopTextClick}
               style={{
                 color: textColor,
@@ -296,7 +370,7 @@ const Template2 = () => {
             >
               {topText}
             </div>
-            <div className="h-auto w-[800px] rounded-b shadow-md">
+            <div className="h-auto w-[260px] rounded-b shadow-md sm:w-[400px] md:w-[520px] lg:w-[700px] xl:w-[800px] 2xl:w-[800px]">
               <img
                 src={selectedImage}
                 alt="Uploaded"
@@ -304,7 +378,7 @@ const Template2 = () => {
               />
             </div>
             <div
-              className="cursor-pointer bg-black bg-opacity-70 py-2 text-center text-xl text-white"
+              className="w-[260px] cursor-pointer bg-black bg-opacity-70 py-2 text-center text-xl text-white sm:w-[400px] md:w-[520px] lg:w-[700px] lg:p-4 lg:text-[35px] xl:w-[800px] 2xl:w-[800px] "
               onClick={handleBottomTextClick}
               style={{
                 color: textColor,
@@ -346,7 +420,7 @@ const Template2 = () => {
 
       {selectedImage && (
         <div className="fixed bottom-0 flex w-full items-center justify-center rounded-t-md bg-white lg:hidden">
-          <div className="flex w-10/12 items-center justify-between rounded-md bg-[#fff] px-4 py-1">
+          {/* <div className="flex w-10/12 items-center justify-between rounded-md bg-[#fff] px-4 py-1">
             <div>
               <input
                 type="file"
@@ -418,7 +492,7 @@ const Template2 = () => {
             >
               <FaUnderline className="text-[#343434]" />
             </div>
-          </div>
+          </div> */}
         </div>
       )}
     </div>
