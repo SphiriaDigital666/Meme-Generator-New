@@ -361,6 +361,11 @@ const MemeEditor = () => {
                     <div className="grid grid-cols-1 gap-8 lg:grid-cols-12">
                       <div className="bg border-indigo-500 lg:col-span-8">
                         <div>
+                          {/* Meme Templates */}
+                          <p className="mb-2 mt-6 font-semibold text-[#fff] sm:text-[22px] md:text-[23px] xl:text-[25px]">
+                            Custom Templates
+                            <ImageSelector handleImageSelect={handleImageSelect} />
+                          </p>
                           <p className="mb-2 font-semibold text-[#fff] sm:text-[22px] md:text-[23px] xl:text-[25px]">
                             Collage
                           </p>
@@ -373,10 +378,7 @@ const MemeEditor = () => {
                             </Link>
                           </div>
 
-                          {/* Meme Templates */}
-                          <p className="mb-2 mt-6 font-semibold text-[#fff] sm:text-[22px] md:text-[23px] xl:text-[25px]">
-                            Custom Templates
-                          </p>
+                          
                           {/* <div
                             ref={memeRef}
                             className="relative inline-block h-full w-full items-center"

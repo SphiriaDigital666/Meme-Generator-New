@@ -33,7 +33,7 @@ const images = [
   { src: image10, route: null, click: false },
 ]
 
-const ImageSelector = ({ onImageSelect }) => {
+const ImageSelector = ({ handleImageSelect }) => {
   const carouselRef = useRef(null)
   const navigate = useNavigate()
   const [customWidth, setCustomWidth] = useState(300) // default width
@@ -65,7 +65,7 @@ const ImageSelector = ({ onImageSelect }) => {
       setShowPopup(true) // Open popup when custom image is clicked
       setImageUploadState(true)
     } else {
-      // onImageSelect(image.src)
+      // handleImageSelect(image.src)
       setSelectedImage(image.src) // Store the selected image
       setShowPopup(true) // Open popup to input width and height
       setImageUploadState(false)
@@ -83,7 +83,7 @@ const ImageSelector = ({ onImageSelect }) => {
       ctx.drawImage(img, 0, 0, customWidth, customHeight)
       const resizedImage = canvas.toDataURL("image/jpeg")
       setPreviewImage(resizedImage)
-      onImageSelect(resizedImage)
+      handleImageSelect(resizedImage)
       setShowPopup(false) // Close the popup after resizing
     }
   }
@@ -106,7 +106,7 @@ const ImageSelector = ({ onImageSelect }) => {
 
           const resizedImage = canvas.toDataURL("image/jpeg")
           setPreviewImage(resizedImage)
-          onImageSelect(resizedImage)
+          handleImageSelect(resizedImage)
         }
       }
       reader.readAsDataURL(file)
@@ -121,7 +121,7 @@ const ImageSelector = ({ onImageSelect }) => {
     <div className="relative w-full overflow-hidden px-8">
       <button
         onClick={handlePrev}
-        className="size-7 md:size-8 lg:size-9 xl:size-10 2xl:size-12 absolute left-0 top-1/2 z-10 flex -translate-y-1/2 transform cursor-pointer items-center justify-center rounded-full  text-[20px] text-white md:text-base lg:text-lg xl:text-xl 2xl:text-2xl"
+        className="size-7 md:size-8 lg:size-9 xl:size-10 2xl:size-12 absolute left-0 top-1/2 z-10 flex -translate-y-1/2 transform cursor-pointer items-center justify-center rounded-full  text-sm text-white md:text-base lg:text-lg xl:text-xl 2xl:text-2xl"
       >
         <FaAngleLeft />
       </button>
@@ -135,8 +135,7 @@ const ImageSelector = ({ onImageSelect }) => {
               key={index}
               src={image.src}
               alt={`Meme ${index}`}
-              className="image-selector mr-2.5 h-auto flex-shrink-0 cursor-pointer rounded-md border-[3px] border-gray-300 sm:w-[calc(33%-6px)] md:w-[calc(25%-10px)] lg:border-4 xl:w-[calc(20%-10px)] 2xl:w-[calc(16%-3px)]"
-              // className="mr-2.5 h-auto w-[calc(33%-6px)] flex-shrink-0 cursor-pointer rounded-md border-[3px] border-gray-300 sm:w-[calc(33%-6px)] md:w-[calc(16.2%-6px)] lg:w-[calc(14%-7px)] lg:border-4 xl:w-[calc(12.5%-10px)] 2xl:w-[calc(12.5%-9.6px)]"
+              className="mr-2.5 h-auto w-[calc(33%-6px)] flex-shrink-0 cursor-pointer rounded-md border-[3px] border-gray-300 sm:w-[calc(33%-6px)] md:w-[calc(16.2%-6px)] lg:w-[calc(14%-7px)] lg:border-4 xl:w-[calc(12.5%-10px)] 2xl:w-[calc(12.5%-9.6px)]"
               onClick={() => handleSelect(image)}
             />
           ))}
@@ -144,7 +143,7 @@ const ImageSelector = ({ onImageSelect }) => {
       </div>
       <button
         onClick={handleNext}
-        className="size-7 md:size-8 lg:size-9 xl:size-10 2xl:size-12 absolute right-0 top-1/2 z-10 flex -translate-y-1/2 transform cursor-pointer items-center justify-center rounded-full  text-[20px] text-white md:text-base lg:text-lg xl:text-xl 2xl:text-2xl"
+        className="size-7 md:size-8 lg:size-9 xl:size-10 2xl:size-12 absolute right-0 top-1/2 z-10 flex -translate-y-1/2 transform cursor-pointer items-center justify-center rounded-full  text-sm text-white md:text-base lg:text-lg xl:text-xl 2xl:text-2xl"
       >
         <FaAngleRight />
       </button>
