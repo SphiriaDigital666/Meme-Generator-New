@@ -269,7 +269,7 @@ const MemeEditor = () => {
   return (
     <div className="overflow-hidden">
       <Provider store={store}>
-        <div className="hidden items-center justify-center sm:flex">
+        <div className="hidden items-center justify-center bg-black sm:flex">
           {
             <h1 className="my-4 bg-none text-lg md:text-xl lg:text-2xl xl:text-3xl">
               {selectedImage && selectedTextId
@@ -322,7 +322,7 @@ const MemeEditor = () => {
 
           {/* main-body */}
           <div
-            className={`middle-section flex items-center justify-center bg-slate-600 ${selectedImage ? "mx-6 bg-[#212024]" : "main-container mx-0 flex items-center justify-center "}`}
+            className={`middle-section flex items-center justify-center ${selectedImage ? "mx-6 bg-[#212024]" : "main-container mx-0 flex items-center justify-center "}`}
             style={{
               backgroundImage: selectedImage ? `url(${canvasImg})` : "none",
               backgroundSize: "cover",
@@ -357,14 +357,14 @@ const MemeEditor = () => {
                 {selectedImage && selectedTextId ? (
                   <div> </div>
                 ) : (
-                  <div className="gradient-div mx-auto my-8 flex items-center justify-center p-10 shadow-md drop-shadow-md backdrop-blur-sm">
+                  <div className="gradient-div mx-auto my-8 flex items-center justify-center p-10 shadow-md drop-shadow-md backdrop-blur-[8px]">
                     <div className="grid grid-cols-1 gap-8 lg:grid-cols-12">
                       <div className="bg border-indigo-500 lg:col-span-8">
                         <div>
                           <p className="mb-2 font-semibold text-[#fff] sm:text-[22px] md:text-[23px] xl:text-[25px]">
                             Collage
                           </p>
-                          <div className="rounded-xl bg-[#fff] bg-opacity-50 px-10 py-8 shadow-md drop-shadow-md">
+                          <div className="rounded-xl bg-[#fff] bg-opacity-50 px-2 py-2 shadow-md drop-shadow-md 2xl:py-5">
                             <Link
                               to="/auth/home"
                               className="text-[75px] text-[#456]"
@@ -405,7 +405,7 @@ const MemeEditor = () => {
                           <p className="mb-2 mt-6 font-semibold text-[#fff] sm:text-[22px] md:text-[23px] xl:text-[25px]">
                             Meme Templates
                           </p>
-                          <div className="mx-auto rounded-xl bg-[#fff] bg-opacity-50 px-10 py-8 shadow-md drop-shadow-md">
+                          <div className="mx-auto rounded-xl bg-[#fff] bg-opacity-50 px-4 py-4 shadow-md drop-shadow-md lg:py-6 xl:py-10">
                             {/* <ImageSelector
                             onImageSelect={handleImageSelect}
                           /> */}
@@ -421,7 +421,8 @@ const MemeEditor = () => {
                         <div className="z-50 hidden h-full w-0.5 bg-white lg:block"></div>
                         <img
                           src={memeImageRight}
-                          className="w-full max-w-[330px] lg:w-4/5"
+                          className="w-[80%] max-w-[330px]"
+                          // className="w-full max-w-[330px] lg:w-4/5"
                         />
                       </div>
                     </div>

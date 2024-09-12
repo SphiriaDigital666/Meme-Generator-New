@@ -15,22 +15,32 @@
 
 .main-container {
   background-image: url("../../assets/meme-editor-background.jpg");
-  background-size: cover; /* This will make the image cover the entire div */
-  background-position: center; /* This will center the image within the div */
-  background-repeat: no-repeat; /* Prevents the image from repeating */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   width: 100%;
-  min-height: 94vh;
+  /* min-height: 94vh; */
 }
 
 .gradient-div {
   height: 100%;
   background: linear-gradient(
     to left,
-    rgba(217, 60, 203, 0.9),
-    rgba(97, 117, 229, 0.9)
+    rgba(217, 60, 203, 0.6),
+    rgba(97, 117, 229, 0.6)
   );
   width: 91%;
 
   border-radius: 20px;
   overflow: hidden;
+}
+
+.image-selector {
+  width: calc(28vw - 11px);
+}
+
+@media (min-width: 405px) {
+  .image-selector {
+    width: calc(48% - 1px);
+  }
 }
