@@ -38,15 +38,17 @@ const PreDefinedTemplates = ({ onImageSelect }) => {
   return (
     <div className="relative">
       <div>
-        <div className="flex flex-col items-center gap-8 sm:flex-row sm:flex-wrap sm:justify-around sm:gap-0">
+        <div className="grid grid-cols-3 justify-items-center gap-2">
           {images.map((image, index) => (
-            <img
-              key={index}
-              src={image.src}
-              alt={`Meme ${index}`}
-              className="mr-2.5 h-auto w-[52%] cursor-pointer rounded-md border-[3px] border-gray-300 sm:w-[30%] md:max-w-[190px]"
-              onClick={() => handleSelect(image)}
-            />
+            <div className="flex w-full justify-center">
+              <img
+                key={index}
+                src={image.src}
+                alt={`Meme ${index}`}
+                className="w-full cursor-pointer rounded-md border-[3px] border-gray-300 sm:max-w-[180px] md:max-w-[186px] lg:max-w-[152px] 2xl:max-w-[180px]"
+                onClick={() => handleSelect(image)}
+              />
+            </div>
           ))}
         </div>
       </div>
