@@ -331,7 +331,7 @@ const MemeEditor = () => {
           >
             <div className="">
               <div className="relative py-3 sm:py-0">
-                {/* <div
+                <div
                   ref={memeRef}
                   className="relative inline-block h-full w-full items-center"
                 >
@@ -353,7 +353,7 @@ const MemeEditor = () => {
                     handleDownloadMeme={handleDownloadMeme}
                     setSelectedImage={setSelectedImage}
                   />
-                </div> */}
+                </div>
                 {selectedImage && selectedTextId ? (
                   <div> </div>
                 ) : (
@@ -377,7 +377,7 @@ const MemeEditor = () => {
                           <p className="mb-2 mt-6 font-semibold text-[#fff] sm:text-[22px] md:text-[23px] xl:text-[25px]">
                             Custom Templates
                           </p>
-                          <div
+                          {/* <div
                             ref={memeRef}
                             className="relative inline-block h-full w-full items-center"
                           >
@@ -399,7 +399,7 @@ const MemeEditor = () => {
                               handleDownloadMeme={handleDownloadMeme}
                               setSelectedImage={setSelectedImage}
                             />
-                          </div>
+                          </div> */}
 
                           {/* Pre defined meme templates */}
                           <p className="mb-2 mt-6 font-semibold text-[#fff] sm:text-[22px] md:text-[23px] xl:text-[25px]">
