@@ -42,6 +42,9 @@ const ImageSelector = ({ handleImageSelect }) => {
   const [selectedImage, setSelectedImage] = useState(null) // Store selected image
   const [imageUploadState, setImageUploadState] = useState(false)
 
+  const [touchStart, setTouchStart] = useState(0)
+  const [touchEnd, setTouchEnd] = useState(0)
+
   const handleNext = () => {
     if (carouselRef.current) {
       const scrollAmount = carouselRef.current.clientWidth / 2
@@ -115,8 +118,30 @@ const ImageSelector = ({ handleImageSelect }) => {
     document.getElementById("customImageUpload").click() // Trigger file input click
   }
 
+  // Touch event handlers for swipe
+  const handleTouchStart = (e) => {
+    setTouchStart(e.targetTouches[0].clientX)
+  }
+
+  const handleTouchMove = (e) => {
+    setTouchEnd(e.targetTouches[0].clientX)
+  }
+
+  const handleTouchEnd = () => {
+    if (touchStart - touchEnd > 75) {
+      handleNext() // Swipe left
+    } else if (touchStart - touchEnd < -75) {
+      handlePrev() // Swipe right
+    }
+  }
+
   return (
-    <div className="relative w-full overflow-hidden px-8">
+    <div
+      className="relative w-full overflow-hidden px-8"
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
+    >
       <button
         onClick={handlePrev}
         className="size-7 md:size-8 lg:size-9 xl:size-10 2xl:size-12 absolute left-0 top-1/2 z-10 flex -translate-y-1/2 transform cursor-pointer items-center justify-center rounded-full  text-sm text-white md:text-base lg:text-lg xl:text-xl 2xl:text-2xl"
