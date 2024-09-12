@@ -34,7 +34,7 @@ const TextEditorSection = ({
   }
 
   return (
-    <div className="right-section ml-4 rounded-lg bg-[#16151a] hidden sm:inline">
+    <div className="right-section ml-4 hidden rounded-lg bg-[#16151a] sm:inline">
       {selectedTextId ? (
         <>
           <div className="flex h-20 w-full flex-row items-center justify-between p-4">
@@ -65,39 +65,43 @@ const TextEditorSection = ({
           </div>
 
           <div className="settings-section">
-            <h3 className="mb-2 pl-3 pt-3 text-white">Select Text Color</h3>
-            <div className="flex items-center justify-center border-b border-[#535353] px-4 py-4">
-              <ColorPicker
-                currentColor={currentColor}
-                onColorChange={handleColorChange}
-              />
+            <div>
+              {" "}
+              <div className="flex flex-col items-start border-b border-[#535353] px-4 py-4">
+                <div className="flex w-full flex-row justify-between">
+                  <h3 className="text-white">Select Text Color</h3>
+                  <ColorPicker
+                    currentColor={currentColor}
+                    onColorChange={handleColorChange}
+                  />
+                </div>
+                <div className="mt-4 flex w-full flex-row justify-between">
+                  <h3 className="text-white">Select Background Color</h3>
+                  <BackgroundColorPicker
+                    currentColor={backgroundColor}
+                    onColorChange={handleBackgroundColorChange}
+                  />
+                </div>
+              </div>
+              <div className="flex flex-col items-start border-b border-[#535353] px-4 py-4">
+                <div className="flex w-full flex-row justify-between">
+                  <h3 className="text-white">Font Style</h3>
+                  <FontSelector
+                    currentFontFamily={selectedText?.fontFamily}
+                    onFontFamilyChange={handleFontFamilyChange}
+                  />
+                </div>
+                <div className="mt-4 flex w-full flex-row justify-between">
+                  <h3 className="text-white">Font Size</h3>
+                  <FontSizeSelector
+                    currentSize={selectedText?.fontSize}
+                    onSizeChange={handleFontSizeChange}
+                  />
+                </div>
+              </div>
             </div>
 
-            <h3 className="mb-2 pl-3 pt-3 text-white">Select Font Style</h3>
-            <div className="flex items-center justify-center border-b border-[#535353] px-4 py-4">
-              <FontSelector
-                currentFontFamily={selectedText?.fontFamily}
-                onFontFamilyChange={handleFontFamilyChange}
-              />
-            </div>
-
-            <h3 className="mb-2 pl-3 pt-3 text-white">Select Font Size</h3>
-            <div className="flex items-center justify-center border-b border-[#535353] px-4 py-4">
-              <FontSizeSelector
-                currentSize={selectedText?.fontSize}
-                onSizeChange={handleFontSizeChange}
-              />
-            </div>
-
-            <h3 className="mb-2 pl-3 pt-3 text-white">Background Color</h3>
-            <div className="flex items-center justify-center border-b border-[#535353] px-4 py-4">
-              <BackgroundColorPicker
-                currentColor={backgroundColor}
-                onColorChange={handleBackgroundColorChange}
-              />
-            </div>
-
-            <div className="mt-4 flex items-center justify-center flex-col">
+            <div className="mt-4 flex flex-col items-center justify-center">
               <button
                 className="mx-3 mt-4 flex w-[100px] items-center justify-center gap-1 rounded-md bg-[#5f5f5f] py-2 text-[10px] leading-none text-white md:w-[110px] md:text-[11px] lg:mx-0 lg:w-[120px] lg:text-[12px] xl:w-[130px] xl:text-[13px] 2xl:w-[150px] 2xl:text-[14px]"
                 onClick={() => changeImage()} // Option to clear the image

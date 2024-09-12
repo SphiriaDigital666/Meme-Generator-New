@@ -55,7 +55,7 @@ const MainCanvas = ({
         </>
       ) : (
         <div className="w-full">
-          <ImageSelector onImageSelect={handleImageSelect} />
+         {/*  <ImageSelector handleImageSelect={handleImageSelect} /> */}
         </div>
       )}
 
