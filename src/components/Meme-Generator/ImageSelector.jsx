@@ -15,12 +15,15 @@ import image10 from "./../../assets/backgroundimages/img10.jpeg"
 import React, { useRef, useState } from "react"
 import { FaAngleRight, FaAngleLeft } from "react-icons/fa6"
 import { useNavigate } from "react-router-dom"
+import Slider from "react-slick"
+
+
 
 const images = [
   { src: image14, route: null, click: true }, // Custom upload image
-  { src: image11, route: "/auth/template1", click: false },
+  /* { src: image11, route: "/auth/template1", click: false },
   { src: image12, route: "/auth/template2", click: false },
-  { src: image13, route: "/auth/template3", click: false },
+  { src: image13, route: "/auth/template3", click: false }, */
   { src: image1, route: null, click: false },
   { src: image2, route: null, click: false },
   { src: image3, route: null, click: false },
@@ -34,6 +37,61 @@ const images = [
 ]
 
 const ImageSelector = ({ handleImageSelect }) => {
+  var settings = {
+    dots: false,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 6,
+    slidesToScroll: 4,
+    initialSlide: 0,
+    swipeToSlide: true,
+    responsive: [
+      {
+        breakpoint: 1600,
+        settings: {
+          slidesToShow: 5,
+          slidesToScroll: 3,
+        },
+      },
+      {
+        breakpoint: 1330,
+        settings: {
+          slidesToShow: 4,
+          slidesToScroll: 3,
+        },
+      },
+      {
+        breakpoint: 1124,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 4,
+          slidesToScroll: 2,
+          initialSlide: 2,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 4,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 400,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+        },
+      },
+    ],
+  }
+
   const carouselRef = useRef(null)
   const navigate = useNavigate()
   const [customWidth, setCustomWidth] = useState(300) // default width
@@ -118,8 +176,8 @@ const ImageSelector = ({ handleImageSelect }) => {
   }
 
   return (
-    <div className="relative w-full overflow-hidden px-8">
-      <button
+    <div className="relative mt-2 w-full overflow-hidden px-8">
+      {/*  <button
         onClick={handlePrev}
         className="size-7 md:size-8 lg:size-9 xl:size-10 2xl:size-12 absolute left-0 top-1/2 z-10 flex -translate-y-1/2 transform cursor-pointer items-center justify-center rounded-full  text-sm text-white md:text-base lg:text-lg xl:text-xl 2xl:text-2xl"
       >
@@ -146,55 +204,72 @@ const ImageSelector = ({ handleImageSelect }) => {
         className="size-7 md:size-8 lg:size-9 xl:size-10 2xl:size-12 absolute right-0 top-1/2 z-10 flex -translate-y-1/2 transform cursor-pointer items-center justify-center rounded-full  text-sm text-white md:text-base lg:text-lg xl:text-xl 2xl:text-2xl"
       >
         <FaAngleRight />
-      </button>
+      </button> */}
+
+      <Slider {...settings}>
+        {images.map((image, index) => (
+          <div className="">
+            <img
+              key={index}
+              src={image.src}
+              alt={`Meme ${index}`}
+              className="h-16 w-16 sm:h-32 sm:w-32"
+              onClick={() => handleSelect(image)}
+            />
+          </div>
+        ))}
+      </Slider>
 
       {/* Popup Modal for custom image upload */}
       {showPopup && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-900 bg-opacity-50">
-          <div className="rounded-lg bg-white p-6">
-            <h2 className="mb-4 text-xl font-bold">Custom Image Upload</h2>
-            <div className="mb-4 flex">
-              <div className="mr-4">
-                <label className="text-black">Width:</label>
+          <div className="mx-4 w-full max-w-sm rounded-lg bg-white p-6 sm:max-w-md lg:max-w-lg">
+            <h2 className="mb-4 text-center text-xl font-bold">
+              Custom Image Upload
+            </h2>
+            <div className="mb-4 flex flex-col sm:flex-row">
+              <div className="mb-4 flex-1 sm:mb-0 sm:mr-4">
+                <label className="mb-2 block text-black">Width:</label>
                 <input
                   type="number"
                   value={customWidth}
                   onChange={(e) => setCustomWidth(e.target.value)}
-                  className="border p-2"
+                  className="w-full border p-2"
                 />
               </div>
-              <div>
-                <label className="text-black">Height:</label>
+              <div className="flex-1">
+                <label className="mb-2 block text-black">Height:</label>
                 <input
                   type="number"
                   value={customHeight}
                   onChange={(e) => setCustomHeight(e.target.value)}
-                  className="border p-2"
+                  className="w-full border p-2"
                 />
               </div>
             </div>
-            {imageUploadState ? (
+            <div className="flex flex-wrap justify-center space-x-0 sm:justify-start sm:space-x-4">
+              {imageUploadState ? (
+                <button
+                  onClick={handleUploadClick}
+                  className="mb-2 w-full rounded-lg bg-blue-500 px-4 py-2 text-white sm:mb-0 sm:w-auto"
+                >
+                  Upload Image
+                </button>
+              ) : (
+                <button
+                  onClick={handleResizeImage}
+                  className="mb-2 w-full rounded-lg bg-blue-500 px-4 py-2 text-white sm:mb-0 sm:w-auto"
+                >
+                  Add Background
+                </button>
+              )}
               <button
-                onClick={handleUploadClick}
-                className="rounded-lg bg-blue-500 px-4 py-2 text-white"
+                onClick={() => setShowPopup(false)}
+                className="ml-0 w-full rounded-lg bg-red-500 px-4 py-2 text-white sm:ml-4 sm:w-auto"
               >
-                Upload Image
+                Cancel
               </button>
-            ) : (
-              <button
-                onClick={handleResizeImage}
-                className="rounded-lg bg-blue-500 px-4 py-2 text-white"
-              >
-                Add Background
-              </button>
-            )}
-
-            <button
-              onClick={() => setShowPopup(false)}
-              className="ml-4 rounded-lg bg-red-500 px-4 py-2 text-white"
-            >
-              Cancel
-            </button>
+            </div>
           </div>
         </div>
       )}
