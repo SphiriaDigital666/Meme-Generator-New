@@ -17,7 +17,7 @@ const MemeGenerator = () => {
   return (
     <div>
       {!selectedImage ? (
-        <ImageSelector onImageSelect={handleImageSelect} />
+        {/* <ImageSelector onImageSelect={handleImageSelect} /> */}
       ) : (
         <MemeEditor image={selectedImage} onSave={handleSaveMeme} />
       )}
