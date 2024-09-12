@@ -94,8 +94,8 @@ const ImageSelector = ({ handleImageSelect }) => {
 
   const carouselRef = useRef(null)
   const navigate = useNavigate()
-  const [customWidth, setCustomWidth] = useState(300) // default width
-  const [customHeight, setCustomHeight] = useState(300) // default height
+  const [customWidth, setCustomWidth] = useState(1000) // default width
+  const [customHeight, setCustomHeight] = useState(1000) // default height
   const [previewImage, setPreviewImage] = useState(null)
   const [showPopup, setShowPopup] = useState(false) // Modal state
 
@@ -231,8 +231,8 @@ const ImageSelector = ({ handleImageSelect }) => {
               <div className="mb-4 flex-1 sm:mb-0 sm:mr-4">
                 <label className="mb-2 block text-black">Width:</label>
                 <input
-                  type="number"
-                  value={customWidth}
+                  type="text"
+                  value={`${customWidth}px`}
                   onChange={(e) => setCustomWidth(e.target.value)}
                   className="w-full border p-2"
                 />
@@ -240,8 +240,8 @@ const ImageSelector = ({ handleImageSelect }) => {
               <div className="flex-1">
                 <label className="mb-2 block text-black">Height:</label>
                 <input
-                  type="number"
-                  value={customHeight}
+                  type="text"
+                  value={`${customHeight}px`}
                   onChange={(e) => setCustomHeight(e.target.value)}
                   className="w-full border p-2"
                 />
