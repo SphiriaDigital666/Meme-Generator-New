@@ -10,6 +10,7 @@ import image9 from "./../../../../assets/characters/image09.png"
 import image11 from "./../../../../assets/dog1.jpg"
 import React, { useRef } from "react"
 import { FaAngleRight, FaAngleLeft } from "react-icons/fa6"
+import Slider from "react-slick";
 
 // Correct import for jQuery
 
@@ -31,6 +32,62 @@ const MemeCharactersMobile = ({
   selectedImage,
   selectedTextId,
 }) => {
+  var settings = {
+    dots: false,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 6,
+    slidesToScroll: 4,
+    initialSlide: 0,
+    swipeToSlide: true,
+    responsive: [
+      {
+        breakpoint: 1600,
+        settings: {
+          slidesToShow: 5,
+          slidesToScroll: 3,
+        },
+      },
+      {
+        breakpoint: 1330,
+        settings: {
+          slidesToShow: 4,
+          slidesToScroll: 3,
+        },
+      },
+      {
+        breakpoint: 1124,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 4,
+          slidesToScroll: 2,
+          initialSlide: 2,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 6,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 400,
+        settings: {
+          slidesToShow: 6,
+          slidesToScroll: 1,
+          
+        },
+      },
+    ],
+  }
+
   const carouselRef = useRef(null)
 
   const handleClickImage = (image) => {
@@ -70,10 +127,10 @@ const MemeCharactersMobile = ({
   }
 
   return (
-    <div className="flex sm:hidden">
+    <div className="sm:hidden">
       {selectedImage && selectedTextId && (
         <>
-          <button onClick={handlePrev} className="size-7">
+          {/* <button onClick={handlePrev} className="size-7">
             <FaAngleLeft />
           </button>
           <div
@@ -105,7 +162,31 @@ const MemeCharactersMobile = ({
           </div>
           <button onClick={handleNext} className="size-7">
             <FaAngleRight />
-          </button>
+          </button> */}
+          <Slider {...settings}>
+          <div className="mx-auto">
+                <input
+                  id="fileInput"
+                  className="hidden"
+                  type="file"
+                  accept="image/*"
+                  onChange={handleStickerUpload}
+                />
+              </div>
+            {images.map((image, index) => (
+              <div className="">
+                <img
+                  key={index}
+                  src={image.src}
+                  alt={`Meme ${index}`}
+                  className="h-16 w-16 sm:h-32 sm:w-32"
+                  onClick={() =>
+                    image.click ? handleUploadImage() : handleClickImage(image)
+                  }
+                />
+              </div>
+            ))}
+          </Slider>
         </>
       )}
     </div>

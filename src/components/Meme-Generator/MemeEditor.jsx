@@ -322,9 +322,8 @@ const MemeEditor = () => {
 
           {/* main-body */}
           <div
-            className={`middle-section flex items-center justify-center ${selectedImage ? "mx-6 bg-[#212024]" : "main-container mx-0 flex items-center justify-center "}`}
+            className={`middle-section bg-gray-500 rounded-lg flex items-center justify-center ${selectedImage ? "mx-6 bg-[#212024]" : "main-container mx-0 flex items-center justify-center "}`}
             style={{
-              backgroundImage: selectedImage ? `url(${canvasImg})` : "none",
               backgroundSize: "cover",
               backgroundPosition: "center",
             }}
@@ -362,9 +361,11 @@ const MemeEditor = () => {
                       <div className="bg border-indigo-500 lg:col-span-8">
                         <div>
                           {/* Meme Templates */}
-                          <p className="mb-2 mt-6 font-semibold text-[#fff] sm:text-[22px] md:text-[23px] xl:text-[25px]">
-                            Custom Templates
-                            <ImageSelector handleImageSelect={handleImageSelect} />
+                          <p className="mb-3 mt-6 font-semibold text-[#fff] sm:text-[22px] md:text-[23px] xl:text-[25px]">
+                            Custom Background Templates
+                            <ImageSelector
+                              handleImageSelect={handleImageSelect}
+                            />
                           </p>
                           <p className="mb-2 font-semibold text-[#fff] sm:text-[22px] md:text-[23px] xl:text-[25px]">
                             Collage
@@ -377,31 +378,6 @@ const MemeEditor = () => {
                               <RowCollage />
                             </Link>
                           </div>
-
-                          
-                          {/* <div
-                            ref={memeRef}
-                            className="relative inline-block h-full w-full items-center"
-                          >
-                            <MainCanvas
-                              selectedImage={selectedImage}
-                              backgroundColor={backgroundColor}
-                              stickers={stickers}
-                              handleStickerDrag={handleStickerDrag}
-                              handleStickerResize={handleStickerResize}
-                              handleStickerRotate={handleStickerRotate}
-                              handleDeleteSticker={handleDeleteSticker}
-                              handleSelectSticker={handleSelectSticker}
-                              selectedStickerId={selectedStickerId}
-                              texts={texts}
-                              selectedTextId={selectedTextId}
-                              handleSelectText={handleSelectText}
-                              setTexts={setTexts}
-                              handleImageSelect={handleImageSelect}
-                              handleDownloadMeme={handleDownloadMeme}
-                              setSelectedImage={setSelectedImage}
-                            />
-                          </div> */}
 
                           {/* Pre defined meme templates */}
                           <p className="mb-2 mt-6 font-semibold text-[#fff] sm:text-[22px] md:text-[23px] xl:text-[25px]">
