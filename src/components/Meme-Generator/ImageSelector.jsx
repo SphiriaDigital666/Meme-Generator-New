@@ -18,9 +18,7 @@ import { useNavigate } from "react-router-dom"
 
 const images = [
   { src: image14, route: null, click: true }, // Custom upload image
-  { src: image11, route: "/auth/template1", click: false },
-  { src: image12, route: "/auth/template2", click: false },
-  { src: image13, route: "/auth/template3", click: false },
+
   { src: image1, route: null, click: false },
   { src: image2, route: null, click: false },
   { src: image3, route: null, click: false },
