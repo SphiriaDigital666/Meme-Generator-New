@@ -361,13 +361,15 @@ const MemeEditor = () => {
                       <div className="bg border-indigo-500 lg:col-span-8">
                         <div>
                           {/* Meme Templates */}
-                          <p className="mb-3 mt-6 font-semibold text-[#fff] sm:text-[22px] md:text-[23px] xl:text-[25px]">
+                          <p className="mb-5 font-semibold text-[#fff] sm:text-[22px] md:text-[23px] xl:text-[25px]">
                             Custom Background Templates
-                            <ImageSelector
-                              handleImageSelect={handleImageSelect}
-                            />
                           </p>
-                          <p className="mb-2 font-semibold text-[#fff] sm:text-[22px] md:text-[23px] xl:text-[25px]">
+
+                          <ImageSelector
+                            handleImageSelect={handleImageSelect}
+                          />
+
+                          <p className="mb-5 mt-8 font-semibold text-[#fff] sm:text-[22px] md:text-[23px] xl:text-[25px]">
                             Collage
                           </p>
                           <div className="rounded-xl bg-[#fff] bg-opacity-50 px-2 py-2 shadow-md drop-shadow-md 2xl:py-5">
@@ -380,7 +382,7 @@ const MemeEditor = () => {
                           </div>
 
                           {/* Pre defined meme templates */}
-                          <p className="mb-2 mt-6 font-semibold text-[#fff] sm:text-[22px] md:text-[23px] xl:text-[25px]">
+                          <p className="mb-5 mt-8 font-semibold text-[#fff] sm:text-[22px] md:text-[23px] xl:text-[25px]">
                             Meme Templates
                           </p>
                           <div className="mx-auto rounded-xl bg-[#fff] bg-opacity-50 px-4 py-4 shadow-md drop-shadow-md lg:py-6 xl:py-10">

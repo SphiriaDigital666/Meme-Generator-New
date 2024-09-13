@@ -175,43 +175,14 @@ const ImageSelector = ({ handleImageSelect }) => {
 
   return (
     <div className="relative mt-2 w-full overflow-hidden px-8">
-      {/*  <button
-        onClick={handlePrev}
-        className="size-7 md:size-8 lg:size-9 xl:size-10 2xl:size-12 absolute left-0 top-1/2 z-10 flex -translate-y-1/2 transform cursor-pointer items-center justify-center rounded-full  text-sm text-white md:text-base lg:text-lg xl:text-xl 2xl:text-2xl"
-      >
-        <FaAngleLeft />
-      </button>
-      <div
-        ref={carouselRef}
-        className="no-scrollbar flex w-full overflow-hidden"
-      >
-        <div className="flex">
-          {images.map((image, index) => (
-            <img
-              key={index}
-              src={image.src}
-              alt={`Meme ${index}`}
-              className="mr-2.5 h-auto w-[calc(33%-6px)] flex-shrink-0 cursor-pointer rounded-md border-[3px] border-gray-300 sm:w-[calc(33%-6px)] md:w-[calc(16.2%-6px)] lg:w-[calc(14%-7px)] lg:border-4 xl:w-[calc(12.5%-10px)] 2xl:w-[calc(12.5%-9.6px)]"
-              onClick={() => handleSelect(image)}
-            />
-          ))}
-        </div>
-      </div>
-      <button
-        onClick={handleNext}
-        className="size-7 md:size-8 lg:size-9 xl:size-10 2xl:size-12 absolute right-0 top-1/2 z-10 flex -translate-y-1/2 transform cursor-pointer items-center justify-center rounded-full  text-sm text-white md:text-base lg:text-lg xl:text-xl 2xl:text-2xl"
-      >
-        <FaAngleRight />
-      </button> */}
-
       <Slider {...settings}>
         {images.map((image, index) => (
-          <div className="">
+          <div className="px-2">
             <img
               key={index}
               src={image.src}
               alt={`Meme ${index}`}
-              className="h-16 w-16 sm:h-32 sm:w-32"
+              className="rounded-xl border-4 border-white"
               onClick={() => handleSelect(image)}
             />
           </div>
