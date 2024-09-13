@@ -61,7 +61,7 @@ const ImageSelector = ({ handleImageSelect }) => {
       {
         breakpoint: 1124,
         settings: {
-          slidesToShow: 3,
+          slidesToShow: 4,
           slidesToScroll: 3,
         },
       },
@@ -76,14 +76,14 @@ const ImageSelector = ({ handleImageSelect }) => {
       {
         breakpoint: 480,
         settings: {
-          slidesToShow: 4,
+          slidesToShow: 3,
           slidesToScroll: 1,
         },
       },
       {
         breakpoint: 400,
         settings: {
-          slidesToShow: 2,
+          slidesToShow: 3,
           slidesToScroll: 1,
         },
       },
@@ -177,12 +177,12 @@ const ImageSelector = ({ handleImageSelect }) => {
     <div className="relative mt-2 w-full overflow-hidden px-8">
       <Slider {...settings}>
         {images.map((image, index) => (
-          <div className="px-2">
+          <div className="px-1 sm:px-2">
             <img
               key={index}
               src={image.src}
               alt={`Meme ${index}`}
-              className="rounded-xl border-4 border-white"
+              className="rounded-xl border-2 border-white sm:border-4"
               onClick={() => handleSelect(image)}
             />
           </div>

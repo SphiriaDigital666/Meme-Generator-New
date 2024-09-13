@@ -269,16 +269,6 @@ const MemeEditor = () => {
   return (
     <div className="overflow-hidden">
       <Provider store={store}>
-        <div className="hidden items-center justify-center bg-black sm:flex">
-          {
-            <h1 className="my-4 bg-none text-lg md:text-xl lg:text-2xl xl:text-3xl">
-              {selectedImage && selectedTextId
-                ? "Meme Template"
-                : "Meme Templates"}
-            </h1>
-          }
-        </div>
-
         {/* responsive meme select */}
         <MemeCharactersMobile
           handleImage={handleImage}
@@ -329,7 +319,7 @@ const MemeEditor = () => {
             }}
           >
             <div className="">
-              <div className="relative py-3 sm:py-0">
+              <div className="relative sm:py-0">
                 <div
                   ref={memeRef}
                   className="relative inline-block h-full w-full items-center"
@@ -356,20 +346,22 @@ const MemeEditor = () => {
                 {selectedImage && selectedTextId ? (
                   <div> </div>
                 ) : (
-                  <div className="gradient-div mx-auto my-8 flex items-center justify-center p-10 shadow-md drop-shadow-md backdrop-blur-[8px]">
+                  <div className="gradient-div mx-2 my-0 mb-4 flex items-center justify-center px-4 py-6 shadow-md drop-shadow-md backdrop-blur-[8px] sm:my-8 sm:p-10">
                     <div className="grid grid-cols-1 gap-8 lg:grid-cols-12">
                       <div className="bg border-indigo-500 lg:col-span-8">
                         <div>
                           {/* Meme Templates */}
-                          <p className="mb-5 font-semibold text-[#fff] sm:text-[22px] md:text-[23px] xl:text-[25px]">
+                          <p className="mb-2 mt-8 font-semibold text-[#fff] sm:mb-5 sm:text-[22px] md:text-[23px] xl:text-[25px]">
                             Custom Background Templates
                           </p>
 
-                          <ImageSelector
-                            handleImageSelect={handleImageSelect}
-                          />
+                          <div className="rounded-xl bg-[#fff] bg-opacity-50 px-2 py-2 shadow-md drop-shadow-md 2xl:py-5">
+                            <ImageSelector
+                              handleImageSelect={handleImageSelect}
+                            />
+                          </div>
 
-                          <p className="mb-5 mt-8 font-semibold text-[#fff] sm:text-[22px] md:text-[23px] xl:text-[25px]">
+                          <p className="mb-2 mt-8 font-semibold text-[#fff] sm:mb-5 sm:text-[22px] md:text-[23px] xl:text-[25px]">
                             Collage
                           </p>
                           <div className="rounded-xl bg-[#fff] bg-opacity-50 px-2 py-2 shadow-md drop-shadow-md 2xl:py-5">
@@ -382,13 +374,13 @@ const MemeEditor = () => {
                           </div>
 
                           {/* Pre defined meme templates */}
-                          <p className="mb-5 mt-8 font-semibold text-[#fff] sm:text-[22px] md:text-[23px] xl:text-[25px]">
+                          <p className="mb-2 mt-8 font-semibold text-[#fff] sm:mb-5 sm:text-[22px] md:text-[23px] xl:text-[25px]">
                             Meme Templates
                           </p>
                           <div className="mx-auto rounded-xl bg-[#fff] bg-opacity-50 px-4 py-4 shadow-md drop-shadow-md lg:py-6 xl:py-10">
                             {/* <ImageSelector
-                            onImageSelect={handleImageSelect}
-                          /> */}
+                          onImageSelect={handleImageSelect}
+                        /> */}
 
                             <PreDefinedTemplates
                               onImageSelect={handleImageSelect}
