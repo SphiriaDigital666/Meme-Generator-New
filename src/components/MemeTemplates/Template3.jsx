@@ -4,6 +4,7 @@ import "./Template.css"
 import React, { useState, useRef } from "react"
 import { FaBold, FaItalic, FaUnderline } from "react-icons/fa"
 import { FaDownload } from "react-icons/fa"
+import { IoCloseCircleOutline } from "react-icons/io5"
 import { MdAddPhotoAlternate } from "react-icons/md"
 import { MdArrowBackIos } from "react-icons/md"
 import { TbPhotoPlus } from "react-icons/tb"
@@ -394,27 +395,42 @@ const Template3 = () => {
 
       {(isTopPopupOpen || isBottomPopupOpen) && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="rounded bg-white p-4 shadow-md">
-            <h2 className="mb-2 text-xl text-black">Enter your text</h2>
-            <input
-              type="text"
-              value={tempText}
-              onChange={handleTextChange}
-              className="mb-4 w-full border p-2"
-            />
-            {isTopPopupOpen && topTextError && (
-              <p className="mb-4 text-red-500">{topTextError}</p>
-            )}
-            {isBottomPopupOpen && bottomTextError && (
-              <p className="mb-4 text-red-500">{bottomTextError}</p>
-            )}
-            <button
-              onClick={handleDoneClick}
-              className="rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
-              disabled={topTextError || bottomTextError} // Disable button if there's an error
+          <div className="rounded bg-white p-2 shadow-md">
+            <div
+              className="mb-2 flex cursor-pointer items-center justify-end"
+              onClick={() =>
+                setIsTopPopupOpen(false) || setIsBottomPopupOpen(false)
+              }
             >
-              Done
-            </button>
+              <IoCloseCircleOutline className="text-[26px] text-black" />
+            </div>
+
+            <div className="px-4">
+              <h2 className="mb-4 text-center text-lg font-semibold text-black lg:text-xl">
+                Enter Your Text Here
+              </h2>
+              <input
+                type="text"
+                value={tempText}
+                onChange={handleTextChange}
+                className="mb-6 w-full rounded-md border-2 border-[#bdbdbd] bg-white p-2 text-black"
+              />
+              {isTopPopupOpen && topTextError && (
+                <p className="mb-4 text-red-500">{topTextError}</p>
+              )}
+              {isBottomPopupOpen && bottomTextError && (
+                <p className="mb-4 text-red-500">{bottomTextError}</p>
+              )}
+              <div className="flex items-center justify-end">
+                <button
+                  onClick={handleDoneClick}
+                  className="mb-2 rounded-md bg-gradient-to-r from-[#ce2783] to-[#403bc8] px-2 py-1 text-white "
+                  disabled={topTextError || bottomTextError} // Disable button if there's an error
+                >
+                  Done
+                </button>{" "}
+              </div>{" "}
+            </div>
           </div>
         </div>
       )}

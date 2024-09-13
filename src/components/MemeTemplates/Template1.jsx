@@ -371,7 +371,7 @@ const Template1 = () => {
                   className={`mb-2 rounded px-2 py-1 text-white ${
                     tempText.length > 15
                       ? "cursor-not-allowed bg-gray-500"
-                      : "bg-green-500 hover:bg-green-600"
+                      : "rounded-md bg-gradient-to-r from-[#ce2783] to-[#403bc8]"
                   }`}
                 >
                   Done
