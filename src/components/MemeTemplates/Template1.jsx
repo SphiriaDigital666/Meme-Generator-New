@@ -6,6 +6,7 @@ import React, { useState, useRef } from "react"
 import { FaBold, FaItalic, FaUnderline } from "react-icons/fa"
 import { FaDownload } from "react-icons/fa"
 import { FaSquarePlus } from "react-icons/fa6"
+import { IoCloseCircleOutline } from "react-icons/io5"
 import { MdAddPhotoAlternate } from "react-icons/md"
 import { MdArrowBackIos } from "react-icons/md"
 import { TbPhotoPlus } from "react-icons/tb"
@@ -342,31 +343,41 @@ const Template1 = () => {
 
       {isPopupOpen && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="rounded bg-white shadow-md lg:p-4">
-            <h2 className="mb-2 text-lg text-black lg:text-xl">
-              Enter your text
-            </h2>
-            <input
-              type="text"
-              value={tempText}
-              onChange={handleTextChange}
-              className="mb-4 w-full border p-2"
-            />
-            {errorMessage && (
-              <p className="mb-3 text-red-500">{errorMessage}</p>
-            )}
-
-            <button
-              onClick={handleDoneClick}
-              disabled={tempText.length > 15}
-              className={`rounded px-4 py-2 text-white ${
-                tempText.length > 15
-                  ? "cursor-not-allowed bg-gray-500"
-                  : "bg-green-500 hover:bg-green-600"
-              }`}
+          <div className="rounded bg-white shadow-md lg:p-2">
+            <div
+              className="mb-1 flex cursor-pointer items-center justify-end"
+              onClick={() => setIsPopupOpen(false)}
             >
-              Done
-            </button>
+              <IoCloseCircleOutline className="text-[26px] text-black" />
+            </div>
+            <div className="px-4">
+              <h2 className="mb-4 text-center text-lg font-semibold text-black lg:text-xl">
+                Enter Your Text Here
+              </h2>
+              <input
+                type="text"
+                value={tempText}
+                onChange={handleTextChange}
+                className="mb-6 w-full rounded-md border-2 border-[#bdbdbd] bg-white p-2 text-black"
+              />
+              {errorMessage && (
+                <p className="mb-3 text-red-500">{errorMessage}</p>
+              )}
+
+              <div className="flex items-center justify-end">
+                <button
+                  onClick={handleDoneClick}
+                  disabled={tempText.length > 15}
+                  className={`mb-2 rounded px-2 py-1 text-white ${
+                    tempText.length > 15
+                      ? "cursor-not-allowed bg-gray-500"
+                      : "bg-green-500 hover:bg-green-600"
+                  }`}
+                >
+                  Done
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       )}
