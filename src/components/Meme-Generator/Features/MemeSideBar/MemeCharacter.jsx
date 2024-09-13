@@ -66,7 +66,7 @@ const MemeCharacters = ({ handleImage, selectedImage, selectedTextId }) => {
                 <div key={i}>
                   <img
                     src={image.src}
-                    className="h-32 w-32 cursor-pointer border-b-2 border-indigo-500 pb-1"
+                    className="m-3 h-32 w-32 cursor-pointer rounded-md border border-[#ddd] pb-1"
                     alt=""
                     onClick={() =>
                       image.click
