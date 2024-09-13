@@ -19,7 +19,9 @@ import Slider from "react-slick"
 
 const images = [
   { src: image14, route: null, click: true }, // Custom upload image
-
+  /* { src: image11, route: "/auth/template1", click: false },
+  { src: image12, route: "/auth/template2", click: false },
+  { src: image13, route: "/auth/template3", click: false }, */
   { src: image1, route: null, click: false },
   { src: image2, route: null, click: false },
   { src: image3, route: null, click: false },
@@ -98,9 +100,6 @@ const ImageSelector = ({ handleImageSelect }) => {
   const [selectedImage, setSelectedImage] = useState(null) // Store selected image
   const [imageUploadState, setImageUploadState] = useState(false)
 
-  const [touchStart, setTouchStart] = useState(0)
-  const [touchEnd, setTouchEnd] = useState(0)
-
   const handleNext = () => {
     if (carouselRef.current) {
       const scrollAmount = carouselRef.current.clientWidth / 2
@@ -174,31 +173,9 @@ const ImageSelector = ({ handleImageSelect }) => {
     document.getElementById("customImageUpload").click() // Trigger file input click
   }
 
-  // Touch event handlers for swipe
-  const handleTouchStart = (e) => {
-    setTouchStart(e.targetTouches[0].clientX)
-  }
-
-  const handleTouchMove = (e) => {
-    setTouchEnd(e.targetTouches[0].clientX)
-  }
-
-  const handleTouchEnd = () => {
-    if (touchStart - touchEnd > 75) {
-      handleNext() // Swipe left
-    } else if (touchStart - touchEnd < -75) {
-      handlePrev() // Swipe right
-    }
-  }
-
   return (
-    <div
-      className="relative w-full overflow-hidden px-8"
-      onTouchStart={handleTouchStart}
-      onTouchMove={handleTouchMove}
-      onTouchEnd={handleTouchEnd}
-    >
-      <button
+    <div className="relative mt-2 w-full overflow-hidden px-8">
+      {/*  <button
         onClick={handlePrev}
         className="size-7 md:size-8 lg:size-9 xl:size-10 2xl:size-12 absolute left-0 top-1/2 z-10 flex -translate-y-1/2 transform cursor-pointer items-center justify-center rounded-full  text-sm text-white md:text-base lg:text-lg xl:text-xl 2xl:text-2xl"
       >
@@ -225,8 +202,8 @@ const ImageSelector = ({ handleImageSelect }) => {
         className="size-7 md:size-8 lg:size-9 xl:size-10 2xl:size-12 absolute right-0 top-1/2 z-10 flex -translate-y-1/2 transform cursor-pointer items-center justify-center rounded-full  text-sm text-white md:text-base lg:text-lg xl:text-xl 2xl:text-2xl"
       >
         <FaAngleRight />
-      </button>{" "}
-      */}
+      </button> */}
+
       <Slider {...settings}>
         {images.map((image, index) => (
           <div className="">
@@ -240,6 +217,7 @@ const ImageSelector = ({ handleImageSelect }) => {
           </div>
         ))}
       </Slider>
+
       {/* Popup Modal for custom image upload */}
       {showPopup && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-900 bg-opacity-50">
@@ -293,6 +271,7 @@ const ImageSelector = ({ handleImageSelect }) => {
           </div>
         </div>
       )}
+
       {/* Hidden file input for custom image upload */}
       <input
         type="file"
@@ -301,6 +280,7 @@ const ImageSelector = ({ handleImageSelect }) => {
         id="customImageUpload"
         onChange={handleImageUpload}
       />
+
       {/* Image preview */}
       {previewImage && (
         <div className="mt-4">
