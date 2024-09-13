@@ -269,16 +269,6 @@ const MemeEditor = () => {
   return (
     <div className="overflow-hidden">
       <Provider store={store}>
-        <div className="hidden items-center justify-center bg-black sm:flex">
-          {
-            <h1 className="my-4 bg-none text-lg md:text-xl lg:text-2xl xl:text-3xl">
-              {selectedImage && selectedTextId
-                ? "Meme Template"
-                : "Meme Templates"}
-            </h1>
-          }
-        </div>
-
         {/* responsive meme select */}
         <MemeCharactersMobile
           handleImage={handleImage}
@@ -365,9 +355,11 @@ const MemeEditor = () => {
                             Custom Background Templates
                           </p>
 
-                          <ImageSelector
-                            handleImageSelect={handleImageSelect}
-                          />
+                          <div className="rounded-xl bg-[#fff] bg-opacity-50 px-2 py-2 shadow-md drop-shadow-md 2xl:py-5">
+                            <ImageSelector
+                              handleImageSelect={handleImageSelect}
+                            />
+                          </div>
 
                           <p className="mb-5 mt-8 font-semibold text-[#fff] sm:text-[22px] md:text-[23px] xl:text-[25px]">
                             Collage
