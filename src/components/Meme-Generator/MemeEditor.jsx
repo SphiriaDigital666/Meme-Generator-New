@@ -319,7 +319,7 @@ const MemeEditor = () => {
             }}
           >
             <div className="">
-              <div className="relative py-3 sm:py-0">
+              <div className="relative sm:py-0">
                 <div
                   ref={memeRef}
                   className="relative inline-block h-full w-full items-center"
@@ -346,7 +346,7 @@ const MemeEditor = () => {
                 {selectedImage && selectedTextId ? (
                   <div> </div>
                 ) : (
-                  <div className="gradient-div mx-auto my-8 flex items-center justify-center p-10 shadow-md drop-shadow-md backdrop-blur-[8px]">
+                  <div className="gradient-div mx-auto my-0 flex items-center justify-center px-4 py-6 shadow-md drop-shadow-md backdrop-blur-[8px] sm:my-8 sm:p-10">
                     <div className="grid grid-cols-1 gap-8 lg:grid-cols-12">
                       <div className="bg border-indigo-500 lg:col-span-8">
                         <div>
