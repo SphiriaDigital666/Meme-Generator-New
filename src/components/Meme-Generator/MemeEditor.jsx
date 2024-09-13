@@ -346,12 +346,12 @@ const MemeEditor = () => {
                 {selectedImage && selectedTextId ? (
                   <div> </div>
                 ) : (
-                  <div className="gradient-div mx-auto my-0 flex items-center justify-center px-4 py-6 shadow-md drop-shadow-md backdrop-blur-[8px] sm:my-8 sm:p-10">
+                  <div className="gradient-div mx-2 my-0 mb-4 flex items-center justify-center px-4 py-6 shadow-md drop-shadow-md backdrop-blur-[8px] sm:my-8 sm:p-10">
                     <div className="grid grid-cols-1 gap-8 lg:grid-cols-12">
                       <div className="bg border-indigo-500 lg:col-span-8">
                         <div>
                           {/* Meme Templates */}
-                          <p className="mb-5 font-semibold text-[#fff] sm:text-[22px] md:text-[23px] xl:text-[25px]">
+                          <p className="mb-2 mt-8 font-semibold text-[#fff] sm:mb-5 sm:text-[22px] md:text-[23px] xl:text-[25px]">
                             Custom Background Templates
                           </p>
 
@@ -361,7 +361,7 @@ const MemeEditor = () => {
                             />
                           </div>
 
-                          <p className="mb-5 mt-8 font-semibold text-[#fff] sm:text-[22px] md:text-[23px] xl:text-[25px]">
+                          <p className="mb-2 mt-8 font-semibold text-[#fff] sm:mb-5 sm:text-[22px] md:text-[23px] xl:text-[25px]">
                             Collage
                           </p>
                           <div className="rounded-xl bg-[#fff] bg-opacity-50 px-2 py-2 shadow-md drop-shadow-md 2xl:py-5">
@@ -374,13 +374,13 @@ const MemeEditor = () => {
                           </div>
 
                           {/* Pre defined meme templates */}
-                          <p className="mb-5 mt-8 font-semibold text-[#fff] sm:text-[22px] md:text-[23px] xl:text-[25px]">
+                          <p className="mb-2 mt-8 font-semibold text-[#fff] sm:mb-5 sm:text-[22px] md:text-[23px] xl:text-[25px]">
                             Meme Templates
                           </p>
                           <div className="mx-auto rounded-xl bg-[#fff] bg-opacity-50 px-4 py-4 shadow-md drop-shadow-md lg:py-6 xl:py-10">
                             {/* <ImageSelector
-                            onImageSelect={handleImageSelect}
-                          /> */}
+                          onImageSelect={handleImageSelect}
+                        /> */}
 
                             <PreDefinedTemplates
                               onImageSelect={handleImageSelect}
