@@ -322,9 +322,8 @@ const MemeEditor = () => {
 
           {/* main-body */}
           <div
-            className={`middle-section flex items-center justify-center ${selectedImage ? "mx-6 bg-[#212024]" : "main-container mx-0 flex items-center justify-center "}`}
+            className={`middle-section bg-gray-500 rounded-lg flex items-center justify-center ${selectedImage ? "mx-6 bg-[#212024]" : "main-container mx-0 flex items-center justify-center "}`}
             style={{
-              backgroundImage: selectedImage ? `url(${canvasImg})` : "none",
               backgroundSize: "cover",
               backgroundPosition: "center",
             }}
@@ -362,6 +361,7 @@ const MemeEditor = () => {
                       <div className="bg border-indigo-500 lg:col-span-8">
                         <div>
                           {/* Meme Templates */}
+<<<<<<< HEAD
                           <div className="mb-6">
                             <p className="mb-2 font-semibold text-[#fff] sm:text-[22px] md:text-[23px] xl:text-[25px]">
                               Background Templates
@@ -377,6 +377,13 @@ const MemeEditor = () => {
                           {/* Pre defined meme templates */}
                           <p className="mb-2 mt-6 font-semibold text-[#fff] sm:text-[22px] md:text-[23px] xl:text-[25px]">
                             Meme Templates
+=======
+                          <p className="mb-3 mt-6 font-semibold text-[#fff] sm:text-[22px] md:text-[23px] xl:text-[25px]">
+                            Custom Background Templates
+                            <ImageSelector
+                              handleImageSelect={handleImageSelect}
+                            />
+>>>>>>> 892d69139f49f5d948d0baa5f4e3647ec46ebf11
                           </p>
                           <div className="mx-auto rounded-xl bg-[#fff] bg-opacity-50 px-4 py-4 shadow-md drop-shadow-md lg:py-6 xl:py-10">
                             {/* <ImageSelector
@@ -400,6 +407,7 @@ const MemeEditor = () => {
                             </Link>
                           </div>
 
+<<<<<<< HEAD
                           {/* <div
                             ref={memeRef}
                             className="relative inline-block h-full w-full items-center"
@@ -423,6 +431,21 @@ const MemeEditor = () => {
                               setSelectedImage={setSelectedImage}
                             />
                           </div> */}
+=======
+                          {/* Pre defined meme templates */}
+                          <p className="mb-2 mt-6 font-semibold text-[#fff] sm:text-[22px] md:text-[23px] xl:text-[25px]">
+                            Meme Templates
+                          </p>
+                          <div className="mx-auto rounded-xl bg-[#fff] bg-opacity-50 px-4 py-4 shadow-md drop-shadow-md lg:py-6 xl:py-10">
+                            {/* <ImageSelector
+                            onImageSelect={handleImageSelect}
+                          /> */}
+
+                            <PreDefinedTemplates
+                              onImageSelect={handleImageSelect}
+                            />
+                          </div>
+>>>>>>> 892d69139f49f5d948d0baa5f4e3647ec46ebf11
                         </div>
                       </div>
 
