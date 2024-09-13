@@ -4,6 +4,7 @@ import "./Template.css"
 import React, { useState, useRef } from "react"
 import { FaBold, FaItalic, FaUnderline } from "react-icons/fa"
 import { FaDownload } from "react-icons/fa"
+import { IoCloseCircleOutline } from "react-icons/io5"
 import { MdAddPhotoAlternate } from "react-icons/md"
 import { MdArrowBackIos } from "react-icons/md"
 import { TbPhotoPlus } from "react-icons/tb"
@@ -371,11 +372,18 @@ const Template2 = () => {
               {topText}
             </div>
             <div className="h-auto w-[260px] rounded-b shadow-md sm:w-[400px] md:w-[520px] lg:w-[700px] xl:w-[800px] 2xl:w-[800px]">
-              <img
-                src={selectedImage}
-                alt="Uploaded"
-                className="h-auto w-full"
-              />
+              <label
+                htmlFor="file-upload-template1"
+                className="cursor-pointer rounded  text-[45px] text-white"
+              >
+                <div>
+                  <img
+                    src={selectedImage}
+                    alt="Uploaded"
+                    className="h-auto w-full"
+                  />
+                </div>
+              </label>
             </div>
             <div
               className="w-[260px] cursor-pointer bg-black bg-opacity-70 py-2 text-center text-xl text-white sm:w-[400px] md:w-[520px] lg:w-[700px] lg:p-4 lg:text-[35px] xl:w-[800px] 2xl:w-[800px] "
@@ -397,23 +405,38 @@ const Template2 = () => {
 
       {(isTopPopupOpen || isBottomPopupOpen) && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="rounded bg-white p-4 shadow-md">
-            <h2 className="mb-2 text-xl">Enter your text</h2>
-            <input
-              type="text"
-              value={tempText}
-              onChange={handleTextChange}
-              className="mb-4 w-full border p-2"
-            />
-            {errorMessage && (
-              <p className="mb-4 text-red-500">{errorMessage}</p>
-            )}
-            <button
-              onClick={handleDoneClick}
-              className="rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
+          <div className="rounded bg-white p-2 shadow-md">
+            <div
+              className="mb-2 flex cursor-pointer items-center justify-end"
+              onClick={() =>
+                setIsTopPopupOpen(false) || setIsBottomPopupOpen(false)
+              }
             >
-              Done
-            </button>
+              <IoCloseCircleOutline className="text-[26px] text-black" />
+            </div>
+
+            <div className="mx-4">
+              <h2 className="mb-4 text-center text-lg font-semibold text-black lg:text-xl">
+                Enter Your Text Here
+              </h2>
+              <input
+                type="text"
+                value={tempText}
+                onChange={handleTextChange}
+                className="mb-6 w-full rounded-md border-2 border-[#bdbdbd] bg-white p-2 text-black"
+              />
+              {errorMessage && (
+                <p className="mb-4 text-red-500">{errorMessage}</p>
+              )}
+              <div className="flex items-center justify-end">
+                <button
+                  onClick={handleDoneClick}
+                  className="rounded bg-blue-500 px-2 py-1 text-white hover:bg-blue-600"
+                >
+                  Done
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       )}
