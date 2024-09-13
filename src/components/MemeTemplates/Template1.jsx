@@ -312,20 +312,27 @@ const Template1 = () => {
             </div>
 
             <div className=" relative">
-              <img
-                src={selectedImage}
-                alt="Uploaded"
-                className="h-auto w-[260px] rounded-b shadow-md sm:w-[400px] md:w-[520px] lg:w-[700px] xl:w-[800px] 2xl:w-[800px]"
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleImageUpload}
+                className="mb-4"
+                id="file-upload-template1"
+                style={{ display: "none" }}
               />
 
-              {/* <div className="absolute inset-0 flex items-center justify-center">
-                <div className="flex flex-col items-center justify-center">
-                  <p className=" mb-4 border-b border-white pb-2 text-[25px] font-light text-white">
-                    Add Your Image Here
-                  </p>
-                  <FaSquarePlus className="text-[60px]" />
+              <label
+                htmlFor="file-upload-template1"
+                className="cursor-pointer rounded  text-[45px] text-white"
+              >
+                <div>
+                  <img
+                    src={selectedImage}
+                    alt="Uploaded"
+                    className="h-auto w-[260px] rounded-b shadow-md sm:w-[400px] md:w-[520px] lg:w-[700px] xl:w-[800px] 2xl:w-[800px]"
+                  />
                 </div>
-              </div> */}
+              </label>
             </div>
           </div>
         </div>

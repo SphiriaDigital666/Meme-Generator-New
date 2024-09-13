@@ -371,11 +371,18 @@ const Template2 = () => {
               {topText}
             </div>
             <div className="h-auto w-[260px] rounded-b shadow-md sm:w-[400px] md:w-[520px] lg:w-[700px] xl:w-[800px] 2xl:w-[800px]">
-              <img
-                src={selectedImage}
-                alt="Uploaded"
-                className="h-auto w-full"
-              />
+              <label
+                htmlFor="file-upload-template1"
+                className="cursor-pointer rounded  text-[45px] text-white"
+              >
+                <div>
+                  <img
+                    src={selectedImage}
+                    alt="Uploaded"
+                    className="h-auto w-full"
+                  />
+                </div>
+              </label>
             </div>
             <div
               className="w-[260px] cursor-pointer bg-black bg-opacity-70 py-2 text-center text-xl text-white sm:w-[400px] md:w-[520px] lg:w-[700px] lg:p-4 lg:text-[35px] xl:w-[800px] 2xl:w-[800px] "
