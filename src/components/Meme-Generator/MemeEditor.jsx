@@ -360,6 +360,16 @@ const MemeEditor = () => {
                             />
                           </div>
 
+                          {/* Pre defined meme templates */}
+                          <p className="mb-2 mt-8 font-semibold text-[#fff] sm:mb-5 sm:text-[22px] md:text-[23px] xl:text-[25px]">
+                            Meme Templates
+                          </p>
+                          <div className="mx-auto rounded-xl bg-[#fff] bg-opacity-50 px-4 py-4 shadow-md drop-shadow-md lg:py-6 xl:py-10">
+                            <PreDefinedTemplates
+                              onImageSelect={handleImageSelect}
+                            />
+                          </div>
+
                           {/* Collage Section */}
                           <p className="mb-2 mt-8 font-semibold text-[#fff] sm:mb-5 sm:text-[22px] md:text-[23px] xl:text-[25px]">
                             Collage
@@ -371,16 +381,6 @@ const MemeEditor = () => {
                             >
                               <RowCollage />
                             </Link>
-                          </div>
-
-                          {/* Pre defined meme templates */}
-                          <p className="mb-2 mt-8 font-semibold text-[#fff] sm:mb-5 sm:text-[22px] md:text-[23px] xl:text-[25px]">
-                            Meme Templates
-                          </p>
-                          <div className="mx-auto rounded-xl bg-[#fff] bg-opacity-50 px-4 py-4 shadow-md drop-shadow-md lg:py-6 xl:py-10">
-                            <PreDefinedTemplates
-                              onImageSelect={handleImageSelect}
-                            />
                           </div>
                         </div>
                       </div>
