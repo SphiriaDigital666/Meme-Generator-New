@@ -14,6 +14,7 @@ import image9 from "./../../assets/backgroundimages/img9.jpeg"
 import image10 from "./../../assets/backgroundimages/img10.jpeg"
 import React, { useRef, useState } from "react"
 import { FaAngleRight, FaAngleLeft } from "react-icons/fa6"
+import { IoCloseCircleOutline } from "react-icons/io5"
 import { useNavigate } from "react-router-dom"
 import Slider from "react-slick"
 
@@ -182,7 +183,7 @@ const ImageSelector = ({ handleImageSelect }) => {
               key={index}
               src={image.src}
               alt={`Meme ${index}`}
-              className="rounded-xl border-2 border-white sm:border-4"
+              className="cursor-pointer rounded-xl border-2 border-white sm:border-4"
               onClick={() => handleSelect(image)}
             />
           </div>
@@ -192,31 +193,44 @@ const ImageSelector = ({ handleImageSelect }) => {
       {/* Popup Modal for custom image upload */}
       {showPopup && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-900 bg-opacity-50">
-          <div className="mx-4 w-full max-w-sm rounded-lg bg-white p-6 sm:max-w-md lg:max-w-lg">
-            <h2 className="mb-4 text-center text-xl font-bold">
-              Custom Image Upload
-            </h2>
-            <div className="mb-4 flex flex-col sm:flex-row">
-              <div className="mb-4 flex-1 sm:mb-0 sm:mr-4">
-                <label className="mb-2 block text-black">Width:</label>
-                <input
-                  type="text"
-                  value={`${customWidth}px`}
-                  onChange={(e) => setCustomWidth(e.target.value)}
-                  className="w-full border p-2"
-                />
-              </div>
-              <div className="flex-1">
-                <label className="mb-2 block text-black">Height:</label>
-                <input
-                  type="text"
-                  value={`${customHeight}px`}
-                  onChange={(e) => setCustomHeight(e.target.value)}
-                  className="w-full border p-2"
-                />
+          <div className="mx-4 w-max rounded-lg bg-white p-4">
+            <div
+              className="mb-2 flex cursor-pointer items-center justify-end"
+              onClick={() => setShowPopup(false)}
+            >
+              <IoCloseCircleOutline className="text-[26px] text-black" />
+            </div>
+
+            <div className="mx-8">
+              <p className="mb-1 text-center text-[18px] font-medium text-black">
+                Choose Your Meme Size
+              </p>
+              <p className="mb-4 text-center text-[18px] font-medium text-black">
+                (In Pixels)
+              </p>
+              <div className="mb-4 flex flex-col">
+                <div className="mb-4">
+                  <input
+                    type="text"
+                    placeholder="Width"
+                    value={`${customWidth}`}
+                    onChange={(e) => setCustomWidth(e.target.value)}
+                    className="w-full rounded-md border-2 border-[#bdbdbd] bg-white p-2 text-black"
+                  />
+                </div>
+                <div className="">
+                  <input
+                    type="text"
+                    placeholder="Height"
+                    value={`${customHeight}`}
+                    onChange={(e) => setCustomHeight(e.target.value)}
+                    className="w-full rounded-md border-2 border-[#bdbdbd] bg-white p-2 text-black"
+                  />
+                </div>
               </div>
             </div>
-            <div className="flex flex-wrap justify-center space-x-0 sm:justify-start sm:space-x-4">
+
+            <div className="flex flex-wrap justify-center space-x-0 ">
               {imageUploadState ? (
                 <button
                   onClick={handleUploadClick}
@@ -225,19 +239,21 @@ const ImageSelector = ({ handleImageSelect }) => {
                   Upload Image
                 </button>
               ) : (
-                <button
-                  onClick={handleResizeImage}
-                  className="mb-2 w-full rounded-lg bg-blue-500 px-4 py-2 text-white sm:mb-0 sm:w-auto"
-                >
-                  Add Background
-                </button>
+                <div className="flex items-center justify-center">
+                  <button
+                    onClick={handleResizeImage}
+                    className="mb-2 mt-4 w-full rounded-md bg-blue-500 bg-gradient-to-r from-[#ce2783] to-[#403bc8] px-4 py-2 text-white"
+                  >
+                    Add Background
+                  </button>
+                </div>
               )}
-              <button
+              {/* <button
                 onClick={() => setShowPopup(false)}
                 className="ml-0 w-full rounded-lg bg-red-500 px-4 py-2 text-white sm:ml-4 sm:w-auto"
               >
                 Cancel
-              </button>
+              </button> */}
             </div>
           </div>
         </div>
