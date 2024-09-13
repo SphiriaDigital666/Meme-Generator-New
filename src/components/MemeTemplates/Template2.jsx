@@ -431,7 +431,7 @@ const Template2 = () => {
               <div className="flex items-center justify-end">
                 <button
                   onClick={handleDoneClick}
-                  className="rounded bg-blue-500 px-2 py-1 text-white hover:bg-blue-600"
+                  className="mb-2 rounded rounded-md bg-gradient-to-r from-[#ce2783] to-[#403bc8] px-2 py-1 text-white "
                 >
                   Done
                 </button>
