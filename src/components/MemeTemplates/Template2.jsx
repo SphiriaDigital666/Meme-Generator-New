@@ -171,7 +171,7 @@ const Template2 = () => {
       const dataURL = canvas.toDataURL("image/png")
       const link = document.createElement("a")
       link.href = dataURL
-      link.download = "template2.png"
+      link.download = "memescoin.png"
       link.click()
     }
   }

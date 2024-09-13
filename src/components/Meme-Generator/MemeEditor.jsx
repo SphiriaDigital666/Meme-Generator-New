@@ -322,7 +322,7 @@ const MemeEditor = () => {
 
           {/* main-body */}
           <div
-            className={`middle-section bg-gray-500 rounded-lg flex items-center justify-center ${selectedImage ? "mx-6 bg-[#212024]" : "main-container mx-0 flex items-center justify-center "}`}
+            className={`middle-section flex items-center justify-center rounded-lg bg-gray-500 ${selectedImage ? "mx-6 bg-[#212024]" : "main-container mx-0 flex items-center justify-center "}`}
             style={{
               backgroundSize: "cover",
               backgroundPosition: "center",

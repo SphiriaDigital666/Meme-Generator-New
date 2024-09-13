@@ -17,8 +17,6 @@ import { FaAngleRight, FaAngleLeft } from "react-icons/fa6"
 import { useNavigate } from "react-router-dom"
 import Slider from "react-slick"
 
-
-
 const images = [
   { src: image14, route: null, click: true }, // Custom upload image
   /* { src: image11, route: "/auth/template1", click: false },
