@@ -21,10 +21,6 @@ const StickerEditor = ({
     return Math.atan2(dy, dx) * (180 / Math.PI);
   };
 
-  const clickFun = () => {
-    console.log("object")
-  }
-
   // Generic function to handle rotation
   const handleRotationStart = (e, sticker) => {
     e.stopPropagation();
@@ -113,7 +109,6 @@ const StickerEditor = ({
               style={{
                 transform: `rotate(${sticker.rotation}deg)`,
               }}
-              onClick={() => clickFun()}
             />
             {sticker.id === selectedStickerId && (
               <div>
