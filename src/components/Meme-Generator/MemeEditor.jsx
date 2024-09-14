@@ -226,6 +226,14 @@ const MemeEditor = () => {
     closeButtons.forEach((button) => {
       button.style.display = "none"
     })
+    const resizeIcon = document.querySelectorAll(".sticker-resize-button")
+    resizeIcon.forEach((button) => {
+      button.style.display = "none"
+    })
+    const rotateIcon = document.querySelectorAll(".sticker-rotate-button")
+    rotateIcon.forEach((button) => {
+      button.style.display = "none"
+    })
     const selectedTextElement = document.getElementById(
       `text-${selectedTextId}`,
     )

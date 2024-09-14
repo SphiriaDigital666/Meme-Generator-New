@@ -1,14 +1,16 @@
+import goBack from "../assets/icons/back-button.png"
 import logo from "../assets/memelogonav.png"
 import { navItems } from "../constants1"
 import Signin from "./Signin/Signin"
 import { Menu, X } from "lucide-react"
 import { useState } from "react"
-import { Outlet } from "react-router-dom"
+import { Outlet, useNavigate } from "react-router-dom"
 import { Link } from "react-router-dom"
 
 const Navbar = () => {
   const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false)
   const [showSignin, setShowSignin] = useState(false) // State for displaying Signin component
+  const navigate = useNavigate()
 
   const toggleNavbar = () => {
     setMobileDrawerOpen(!mobileDrawerOpen)
@@ -17,15 +19,23 @@ const Navbar = () => {
   const handlePopup = () => {
     setShowSignin(false)
   }
+
+  const goToBack = () => {
+    navigate(-1)
+  }
   return (
     <>
       <div className="sticky top-0 z-50 border-b border-neutral-700/80 py-3 backdrop-blur-lg">
-        <div className="container relative mx-auto px-4 text-sm">
+        <div className="container relative px-4 text-sm">
           <div className="flex items-center justify-between">
             <div className="flex flex-shrink-0 items-center">
+              <div className="w-full flex justify-start items-center" onClick={goToBack}>
+                <img className="h-6 w-6" src={goBack} alt="MEME_Generate" />
+                <p>Back</p>
+              </div>
               <Link to="/">
                 <img
-                  className="mr-2 h-10 w-10"
+                  className="h-10 w-16"
                   src={logo}
                   alt="MEME_Generate"
                 />
@@ -62,7 +72,7 @@ const Navbar = () => {
           </div>
           {mobileDrawerOpen && (
             <div className="fixed right-0 z-20 flex w-full flex-col items-center justify-center bg-neutral-900 p-12 lg:hidden">
-             {/*  <ul>
+              {/*  <ul>
                 {navItems.map((item, index) => (
                   <li key={index} className="py-4">
                     <a href={item.href}>{item.label}</a>
