@@ -38,9 +38,6 @@ const TextEditorSection = ({
       {selectedTextId ? (
         <>
           <div className="flex h-20 w-full flex-row items-center justify-between p-4">
-            <button className="go-back" onClick={goBack}>
-              <MdArrowBackIos className="text-[30px]" />
-            </button>
             <img
               src={TextIcon}
               alt="Text Editor"
