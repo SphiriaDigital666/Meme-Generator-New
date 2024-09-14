@@ -269,7 +269,7 @@ const ImageSelector = ({ handleImageSelect }) => {
       />
 
       {/* Image preview */}
-      {previewImage && (
+     {/*  {previewImage && (
         <div className="mt-4">
           <h3>Preview:</h3>
           <img
@@ -278,7 +278,7 @@ const ImageSelector = ({ handleImageSelect }) => {
             style={{ width: customWidth, height: customHeight }}
           />
         </div>
-      )}
+      )} */}
     </div>
   )
 }
