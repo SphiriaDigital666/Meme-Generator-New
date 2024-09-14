@@ -2,6 +2,7 @@ import SavedImageDisplay from "./components/Button/SavedImageDisplay"
 import Hero from "./components/Hero"
 import Home from "./components/Home/Home"
 import Login from "./components/Login/Login"
+import MemeEditor from "./components/Meme-Generator/MemeEditor"
 import Template1 from "./components/MemeTemplates/Template1"
 import Template2 from "./components/MemeTemplates/Template2"
 import Template3 from "./components/MemeTemplates/Template3"
@@ -23,6 +24,10 @@ function App() {
         {
           path: "main",
           element: <Login />,
+        },
+        {
+          path: "meme",
+          element: <MemeEditor />,
         },
         {
           path: "home",
